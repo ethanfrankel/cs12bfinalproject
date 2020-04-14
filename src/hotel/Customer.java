@@ -1,5 +1,9 @@
 package hotel;
 
-public class Customer {
-//test
+public abstract class Customer {
+	
+	protected Customer() {
+		
+	}
+
 }
