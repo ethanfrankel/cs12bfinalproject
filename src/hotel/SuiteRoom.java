@@ -1,8 +1,8 @@
 package hotel;
 
-public class Suite extends Room {
+public class SuiteRoom extends Room {
 
-	public Suite() {
+	public SuiteRoom() {
 		// TODO Auto-generated constructor stub
 	}
 
