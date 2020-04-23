@@ -1,11 +1,11 @@
 package hotel;
 
-public class FourGuest extends Room {
+public class FourGuestRoom extends Room {
 	/**
 	 * $300 per night
 	 */
 
-	public FourGuest() {
+	public FourGuestRoom() {
 		// TODO Auto-generated constructor stub
 	}
 
