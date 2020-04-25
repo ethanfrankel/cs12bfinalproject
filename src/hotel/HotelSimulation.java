@@ -15,6 +15,7 @@ public class HotelSimulation {
 	
 	public static void main(String[] args) {
 		Hotel hotel = new Hotel(10, 10, 10, 6);
+		hotel.addRooms();
 		hotel.setRoomNumbers();
 		for (int i = 0; i < hotel.rooms.size(); i++) {
 			System.out.println(hotel.rooms.get(i).detailedToString());
