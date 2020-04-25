@@ -6,7 +6,10 @@ public class SuiteRoom extends Room {
 	 */
 
 	public SuiteRoom() {
-		// TODO Auto-generated constructor stub
+		super();
+		this.price = 500;
+		this.cleaningTime = 0.3;
+		this.type = "Suite Room";
 	}
 
 }

@@ -6,7 +6,10 @@ public class FourGuestRoom extends Room {
 	 */
 
 	public FourGuestRoom() {
-		// TODO Auto-generated constructor stub
+		super();
+		this.price = 300;
+		this.cleaningTime = 0.2;
+		this.type = "Four Guest Room";
 	}
 
 }
