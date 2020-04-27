@@ -1,7 +1,5 @@
 package hotel;
 
-import java.util.ArrayList;
-
 public class Hotel {
 	Room[] rooms;
 	Restaurant restaurant;
@@ -24,7 +22,7 @@ public class Hotel {
 		this.staff = new Staff[this.numStaff];
 		this.totalMoney = 10000;
 	}
-
+	
 	public void addRooms() {
 		for(int i=0; i<this.numTwoGuestRoom; i++) {
 		      this.rooms[i] = new TwoGuestRoom();
@@ -36,21 +34,21 @@ public class Hotel {
 		      this.rooms[i] = new SuiteRoom();
 		}
 	}
-
+	
 	public void setRoomNumbers() {
 		for (int i = 0; i < this.rooms.length; i++) {
 			this.rooms[i].setRoomNumber(i + 1);
 		}
 	}
-
+	
 	public double getTotalMoney() {
 		return this.totalMoney;
 	}
-
+	
 	public void setTotalMoney(int value) {
 		this.totalMoney = value;
 	}
-
+	
 	public void printHotel() {
 		//test
 		System.out.println("Two Guest Rooms: " + this.numTwoGuestRoom);
@@ -58,12 +56,12 @@ public class Hotel {
 		System.out.println("Suite Rooms: " + this.numSuiteRoom);
 		System.out.println("Staff: " + this.numStaff);
 	}
-
+	
 	public Guest createGuest(int numDaysCheckIn) {
 		Guest guest = new Guest(numDaysCheckIn);
 		return guest;
 	}
-
+	
 	public void checkIn(int randNum, int numDaysCheckIn, String roomType) {
 		for (int i = 0; i < this.rooms.length; i++ ) {
 			if (this.rooms[i].type == roomType) {
@@ -80,11 +78,10 @@ public class Hotel {
 					System.out.println("Room unavailable.");
 					break;
 				}
-				*/
 			}
 		}
 	}
-
+	
 	public void determineRoomType(int randNum, int numDaysCheckIn) {
 		if (0 < randNum && randNum < 3) {
 			this.checkIn(randNum, numDaysCheckIn, "Two Guest Room");
@@ -101,7 +98,7 @@ public class Hotel {
 			}
 		}
 	}
-
+	
 	public void updateGuestCounters() {
 		for (int i = 0; i < this.rooms.length; i++) {
 			this.rooms[i].setNumDaysCounter(this.rooms[i].numDaysCounter - 1);
