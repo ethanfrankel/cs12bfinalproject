@@ -6,8 +6,11 @@ public class Guest extends People{
 	 * how long they stay 
 	 * 
 	 */
+	int numDays;
 
-	public Guest() {
+	public Guest(int numDaysCheckIn) {
+		super();
+		this.numDays = numDaysCheckIn;
 		// TODO Auto-generated constructor stub
 	}
 

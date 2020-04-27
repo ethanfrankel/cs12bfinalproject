@@ -58,5 +58,10 @@ public class Hotel {
 		System.out.println("Suite Rooms: " + this.numSuiteRoom);
 		System.out.println("Staff: " + this.numStaff);
 	}
+	
+	public Guest createGuest(int numDaysCheckIn) {
+		Guest guest = new Guest(numDaysCheckIn);
+		return guest;
+	}
 
 }

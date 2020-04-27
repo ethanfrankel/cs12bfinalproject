@@ -6,6 +6,7 @@ public class Room {
 	ArrayList<Guest> occupants;
 	int roomNumber;
 	int price;
+	int numOfPeople;
 	boolean cleaned;
 	boolean available;
 	boolean occupied;
@@ -48,12 +49,20 @@ public class Room {
 		this.occupied = value;
 	}
 	
-	public void addGuests() {
-		
+	public void addGuests(Guest guest) {
+		this.occupants.add(guest);
+		this.numOfPeople++;
 	}
 	
 	public String toString() {
 		return "Room " + this.roomNumber;
+	}
+	
+	public String toStringRoomOccupancy() {
+		if (this.numOfPeople == 0) {
+			return "Room " + this.roomNumber + ": Vacant";
+		}
+		return "Room " + this.roomNumber + ": " + this.numOfPeople + " guests";
 	}
 	
 	public String detailedToString() {
