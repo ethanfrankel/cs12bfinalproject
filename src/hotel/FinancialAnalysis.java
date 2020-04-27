@@ -14,7 +14,7 @@ public class FinancialAnalysis {
 	double totalRevenue;
 	double profit;
 	double numSmallTicks;
-	double currentMoney;
+	double currentAccountBalance;
 	
 	public FinancialAnalysis() {
 		// TODO Auto-generated constructor stub
@@ -28,12 +28,12 @@ public class FinancialAnalysis {
 		
 	}
 	
-	public void setCurrentMoney(double currentTime, double currentMoney) { //not done
+	public void setCurrentAccountBalance(double currentTime, double currentMoney) { //not done
 		
 	}
 	
-	public double getCurrentMoney() { //complete
-		return currentMoney;
+	public double getCurrentAccountBalance() { //complete
+		return currentAccountBalance;
 	}
 	
 	
@@ -55,8 +55,9 @@ public class FinancialAnalysis {
 	}
 
 	
-	public void getFinancialAnalysis(int numDays) { //not done
+	public void financialOverview(int numStaff, int numDays, int totalGuests, int totalCustomers, double currentMoney) { //not done
 		this.profit = this.totalRevenue - this.explicitCosts;
+		
 		
 	}
 
