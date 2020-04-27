@@ -2,6 +2,8 @@ package hotel;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 //test
 //test 2
 public class HotelSimulation {
@@ -12,11 +14,20 @@ public class HotelSimulation {
 	 *input number of days for simulation as parameter
 	 *
 	 *1 = next day, 2 = staff activity report, 3 = customer activity report, 4 = sales report
+	 * @throws FileNotFoundException 
 	 */
 	
-	public static void main(String[] args) {
+	public static final int NUM_NAMES = 18239;
+	
+	public static void main(String[] args) throws FileNotFoundException {
 		
 		Random random = new Random();
+		Scanner scanner = new Scanner(new File("names.txt"));
+		int fileLength = 0;
+		while (scanner.hasNextLine()) {
+			fileLength++;
+		}
+		System.out.println(fileLength);
 		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Number of Rooms holding up to two guests max: ");
@@ -85,5 +96,6 @@ public class HotelSimulation {
 		}
 		return randNum;
 	}
+	
 }
 
