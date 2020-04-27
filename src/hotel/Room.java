@@ -71,9 +71,7 @@ public class Room {
 	}
 	
 	public void checkOut() {
-		for (int i = 0; i < this.occupants.size(); i++) {
-			this.occupants.remove(i);
-		}
+		this.occupants.clear();
 		this.numOfPeople = 0;
 		this.available = true;
 		System.out.println(this.toString() + " has checked out.");
