@@ -100,8 +100,8 @@ public class Hotel {
 	public void updateGuestCounters() {
 		for (int i = 0; i < this.rooms.length; i++) {
 			if (!this.rooms[i].available) {
-				this.rooms[i].setCurrentTimeCounter(this.rooms[i].currentTimeCounter + 0.1);
-				if (this.rooms[i].currentTimeCounter == this.rooms[i].timeAtCheckIn + this.rooms[i].numDaysStay) {
+				this.rooms[i].setCurrentTimeCounter(this.rooms[i].currentTimeCounter + 0.10);
+				if (this.rooms[i].currentTimeCounter >= this.rooms[i].timeAtCheckIn + this.rooms[i].numDaysStay) {
 					this.rooms[i].checkOut();
 				}
 			}

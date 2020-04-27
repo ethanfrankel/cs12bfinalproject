@@ -66,8 +66,7 @@ public class HotelSimulation {
 		for (int j = 0; j < hotel.rooms.length; j++) {
 			System.out.println(hotel.rooms[j].toStringRoomOccupancy());
 		}
-		System.out.println("done");	
-		}
+	}
 	
 	public static int generateRandomNumber(Random random) {
 		int randNum = 0;
