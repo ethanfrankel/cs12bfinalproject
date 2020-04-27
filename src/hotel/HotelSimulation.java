@@ -44,6 +44,13 @@ public class HotelSimulation {
 			//System.out.println(hotel.rooms.get(i).detailedToString());
 		//}
 		
+		System.out.println("This is a hotel simulation that keeps track of people's activities in the hotel as well as a financial report.");
+		String startCommand = "";
+		System.out.println("Start simulation (type \"yes\"): ");
+		while (!startCommand.equals("yes")) {
+			String temp = in.nextLine();
+			startCommand = temp;
+		}
 		for (int i = 1; i < numDays + 1; i++) {
 			for (int j = 0; j < 10; j++) {
 				String dayLittleTick = i + "." + j;
@@ -60,16 +67,17 @@ public class HotelSimulation {
 				}
 				hotel.determineRoomType(randNum, numDaysCheckIn, dayNotation);	
 			}
-				//people who are gone come back
 				//random chance for people to go to restaurant, pool
 				//staff clean rooms
-		}
+			
 			//1,2,3,4
+		}
 		
+		/*
 		for (int j = 0; j < hotel.rooms.length; j++) {
 			System.out.println(hotel.rooms[j].toStringRoomOccupancy());
 			System.out.println(hotel.rooms[j].printGuests());
-		}
+		}*/
 	}
 	
 	public static int generateRandomNumber(Random random) {
