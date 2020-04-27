@@ -57,12 +57,12 @@ public class Hotel {
 		System.out.println("Staff: " + this.numStaff);
 	}
 	
-	public Guest createGuest(int numDaysCheckIn) {
+	public Guest createGuest(double numDaysCheckIn) {
 		Guest guest = new Guest(numDaysCheckIn);
 		return guest;
 	}
 	
-	public void checkIn(int randNum, int numDaysCheckIn, String roomType, int roomTypeNum) {
+	public void checkIn(int randNum, double numDaysCheckIn, double dayNotation, String roomType, int roomTypeNum) {
 		int counter = 0;
 		for (int i = 0; i < this.rooms.length; i++ ) {
 			if (this.rooms[i].type == roomType && this.rooms[i].available) {
@@ -70,7 +70,10 @@ public class Hotel {
 					Guest guest = this.createGuest(numDaysCheckIn);
 					this.rooms[i].addGuests(guest);
 				}
-				this.rooms[i].setNumDaysCounter(numDaysCheckIn);
+				System.out.println("The " + randNum + " guests checked in " + this.rooms[i].detailedToString());
+				this.rooms[i].setNumDaysStay(numDaysCheckIn);
+				this.rooms[i].setTimeAtCheckIn(dayNotation);
+				this.rooms[i].setAvailable(false);
 				break;
 			}
 			else if (this.rooms[i].type == roomType && !this.rooms[i].available) {
@@ -82,28 +85,25 @@ public class Hotel {
 		}
 	}
 	
-	public void determineRoomType(int randNum, int numDaysCheckIn) {
+	public void determineRoomType(int randNum, double numDaysCheckIn, double dayNotation) {
 		if (0 < randNum && randNum < 3) {
-			this.checkIn(randNum, numDaysCheckIn, "Two Guest Room", this.numTwoGuestRoom);
+			this.checkIn(randNum, numDaysCheckIn, dayNotation, "Two Guest Room", this.numTwoGuestRoom);
 		}
 		else if (2 < randNum && randNum < 5) {
-			this.checkIn(randNum, numDaysCheckIn, "Four Guest Room", this.numFourGuestRoom);
+			this.checkIn(randNum, numDaysCheckIn, dayNotation, "Four Guest Room", this.numFourGuestRoom);
 		}
 		else if (4 < randNum && randNum < 9) {
-			this.checkIn(randNum, numDaysCheckIn, "Suite Room", this.numSuiteRoom);
-		}
-		for (int a = 0; a < this.rooms.length; a++ ) {
-			if (this.rooms[a].numOfPeople > 0) {
-				this.rooms[a].setAvailable(false);
-			}
+			this.checkIn(randNum, numDaysCheckIn, dayNotation, "Suite Room", this.numSuiteRoom);
 		}
 	}
 	
 	public void updateGuestCounters() {
 		for (int i = 0; i < this.rooms.length; i++) {
-			this.rooms[i].setNumDaysCounter(this.rooms[i].numDaysCounter - 1);
-			if (this.rooms[i].numDaysCounter == 0) {
-				this.rooms[i].checkOut();
+			if (!this.rooms[i].available) {
+				this.rooms[i].setCurrentTimeCounter(this.rooms[i].currentTimeCounter + 0.1);
+				if (this.rooms[i].currentTimeCounter == this.rooms[i].timeAtCheckIn + this.rooms[i].numDaysStay) {
+					this.rooms[i].checkOut();
+				}
 			}
 		}
 	}

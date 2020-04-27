@@ -7,7 +7,9 @@ public class Room {
 	int roomNumber;
 	int price;
 	int numOfPeople;
-	int numDaysCounter;
+	double numDaysStay;
+	double timeAtCheckIn;
+	double currentTimeCounter;
 	boolean cleaned;
 	boolean available;
 	boolean occupied;
@@ -50,8 +52,17 @@ public class Room {
 		this.occupied = value;
 	}
 	
-	public void setNumDaysCounter(int value) {
-		this.numDaysCounter = value;
+	public void setTimeAtCheckIn(double value) {
+		this.timeAtCheckIn = value;
+		this.currentTimeCounter = value;
+	}
+	
+	public void setCurrentTimeCounter(double value) {
+		this.currentTimeCounter = value;
+	}
+	
+	public void setNumDaysStay (double value) {
+		this.numDaysStay = value;
 	}
 	
 	public void addGuests(Guest guest) {
