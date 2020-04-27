@@ -25,10 +25,11 @@ public class FinancialAnalysis {
 	 */
 	
 	public void earningsPerRoom() { //not done
+		//calculated at end of day (price of room per day
 		
 	}
 	
-	public void setCurrentAccountBalance(double currentTime, double currentMoney) { //not done
+	public void setCurrentAccountBalance(double currentTime, double initialMoney) { //not done
 		
 	}
 	
@@ -55,7 +56,7 @@ public class FinancialAnalysis {
 	}
 
 	
-	public void financialOverview(int numStaff, int numDays, int totalGuests, int totalCustomers, double currentMoney) { //not done
+	public void financialOverview(int numStaff, int numDays, int totalGuests, int totalCustomers, double initialMoney) { //not done
 		this.profit = this.totalRevenue - this.explicitCosts;
 		
 		

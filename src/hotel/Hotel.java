@@ -12,7 +12,7 @@ public class Hotel {
 	Pool pool;
 	Staff[] staff;
 	int numStaff;
-	double totalMoney;
+	double initialMoney;
 	int numTwoGuestRoom;
 	int numFourGuestRoom;
 	int numSuiteRoom;
@@ -29,7 +29,7 @@ public class Hotel {
 		this.numSuiteRoom = numSuiteRoom;
 		this.rooms = new Room[numTwoGuestRoom + numFourGuestRoom + numSuiteRoom];
 		this.staff = new Staff[this.numStaff];
-		this.totalMoney = 10000;
+		this.initialMoney = 10000;
 	}
 	
 	public void addRooms() {
@@ -50,12 +50,12 @@ public class Hotel {
 		}
 	}
 	
-	public double getTotalMoney() {
-		return this.totalMoney;
+	public double getInitialMoney() {
+		return this.initialMoney;
 	}
 	
-	public void setTotalMoney(int value) {
-		this.totalMoney = value;
+	public void setInitialMoney(int value) {
+		this.initialMoney = value;
 	}
 	
 	public void printHotel() {

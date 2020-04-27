@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Room {
 	ArrayList<Guest> occupants;
 	int roomNumber;
-	int price;
+	double price;
 	int numOfPeople;
 	double numDaysStay;
 	double timeAtCheckIn;
@@ -65,6 +65,10 @@ public class Room {
 		this.numDaysStay = value;
 	}
 	
+	public double getPrice() {
+		return this.price;
+	}
+	
 	public void addGuests(Guest guest) {
 		this.occupants.add(guest);
 		this.numOfPeople++;
@@ -75,6 +79,7 @@ public class Room {
 		this.numOfPeople = 0;
 		this.available = true;
 		System.out.println(this.toString() + " has checked out.");
+		//they need to pay
 	}
 	
 	public String toString() {
