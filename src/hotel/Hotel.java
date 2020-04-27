@@ -75,10 +75,12 @@ public class Hotel {
 					this.rooms.get(i).setNumDaysCounter(numDaysCheckIn);
 					break;
 				}
-				else if (!this.rooms.get(i).available) {
+				/*
+				if (!this.rooms.get(i).available) {
 					System.out.println("Room unavailable.");
 					break;
 				}
+				*/
 			}
 		}
 	}
