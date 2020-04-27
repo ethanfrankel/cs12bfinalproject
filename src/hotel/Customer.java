@@ -2,7 +2,7 @@ package hotel;
 
 import java.util.Random;
 
-public class Customer {
+public class Customer extends People{
 	
 	protected Random random = new Random();
 	
