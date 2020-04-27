@@ -94,5 +94,19 @@ public class Room {
 		//test
 		return "Room " + this.roomNumber + ": " + this.type;
 	}
+	
+	public String printGuests() {
+	    String values = "Guests: ";
+	    for (int i = 0; i < this.occupants.size(); i++) {
+	      //this if statement essentially does not print a comma after the last item in list
+	      if (i == this.occupants.size() - 1) {
+	        values = values + this.occupants.get(i).toString();
+	      }
+	      else {
+	        values = values + this.occupants.get(i).toString() + ", ";
+	      }
+	    }
+	    return values;
+	}
 		
 }

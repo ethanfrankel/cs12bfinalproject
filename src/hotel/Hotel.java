@@ -1,6 +1,12 @@
 package hotel;
 
+import java.util.Random;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class Hotel {
+	Random random;
 	Room[] rooms;
 	Restaurant restaurant;
 	Pool pool;
@@ -10,8 +16,11 @@ public class Hotel {
 	int numTwoGuestRoom;
 	int numFourGuestRoom;
 	int numSuiteRoom;
+	
+	public static final int NUM_NAMES = 3000;
 
-	public Hotel(int numTwoGuestRoom, int numFourGuestRoom, int numSuiteRoom, int numStaff) {
+	public Hotel(int numTwoGuestRoom, int numFourGuestRoom, int numSuiteRoom, int numStaff) throws FileNotFoundException {
+		this.random = new Random();
 		this.restaurant = new Restaurant();
 		this.pool = new Pool();
 		this.numStaff = numStaff;
@@ -57,17 +66,35 @@ public class Hotel {
 		System.out.println("Staff: " + this.numStaff);
 	}
 	
-	public Guest createGuest(double numDaysCheckIn) {
-		Guest guest = new Guest(numDaysCheckIn);
+	public Guest createGuest(double numDaysCheckIn, String guestName) {
+		Guest guest = new Guest(numDaysCheckIn, guestName);
 		return guest;
 	}
 	
-	public void checkIn(int randNum, double numDaysCheckIn, double dayNotation, String roomType, int roomTypeNum) {
+	public String randomName() throws FileNotFoundException {
+		Scanner scanner = new Scanner(new File("names.txt"));
+		String guestName = "";
+		int lineCounter = 1;
+		int lineStop = this.random.nextInt(NUM_NAMES) + 1;
+		while (scanner.hasNextLine()) {
+			String name = scanner.next();
+			lineCounter++;
+			if (lineCounter == lineStop) {
+				guestName = name;
+			}
+		}
+		return guestName;
+	}
+	
+	public void checkIn(int randNum, double numDaysCheckIn, double dayNotation, String roomType, int roomTypeNum) throws FileNotFoundException {
 		int counter = 0;
 		for (int i = 0; i < this.rooms.length; i++ ) {
 			if (this.rooms[i].type == roomType && this.rooms[i].available) {
 				for (int j = 0; j < randNum; j++) {
-					Guest guest = this.createGuest(numDaysCheckIn);
+					//call function to generate random name
+					String guestName = this.randomName();
+					System.out.println(guestName);
+					Guest guest = this.createGuest(numDaysCheckIn, guestName);
 					this.rooms[i].addGuests(guest);
 				}
 				System.out.println("The " + randNum + " guests checked in " + this.rooms[i].detailedToString());
@@ -85,7 +112,7 @@ public class Hotel {
 		}
 	}
 	
-	public void determineRoomType(int randNum, double numDaysCheckIn, double dayNotation) {
+	public void determineRoomType(int randNum, double numDaysCheckIn, double dayNotation) throws FileNotFoundException {
 		if (0 < randNum && randNum < 3) {
 			this.checkIn(randNum, numDaysCheckIn, dayNotation, "Two Guest Room", this.numTwoGuestRoom);
 		}

@@ -17,19 +17,10 @@ public class HotelSimulation {
 	 * @throws FileNotFoundException 
 	 */
 	
-	public static final int NUM_NAMES = 18239;
-	
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		Random random = new Random();
-		/*
-		Scanner scanner = new Scanner(new File("names.txt"));
-		int fileLength = 0;
-		while (scanner.hasNextLine()) {
-			fileLength++;
-		}
-		System.out.println(fileLength);
-		*/
+		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Number of Rooms holding up to two guests max: ");
 		int numTwoGuestRooms = in.nextInt();
@@ -77,6 +68,7 @@ public class HotelSimulation {
 		
 		for (int j = 0; j < hotel.rooms.length; j++) {
 			System.out.println(hotel.rooms[j].toStringRoomOccupancy());
+			System.out.println(hotel.rooms[j].printGuests());
 		}
 	}
 	
