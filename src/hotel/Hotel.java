@@ -3,7 +3,7 @@ package hotel;
 import java.util.ArrayList;
 
 public class Hotel {
-	ArrayList<Room> rooms;
+	Room[] rooms;
 	Restaurant restaurant;
 	Pool pool;
 	Staff[] staff;
@@ -20,37 +20,37 @@ public class Hotel {
 		this.numTwoGuestRoom = numTwoGuestRoom;
 		this.numFourGuestRoom = numFourGuestRoom;
 		this.numSuiteRoom = numSuiteRoom;
-		this.rooms = new ArrayList<Room>();
+		this.rooms = new Room[numTwoGuestRoom + numFourGuestRoom + numSuiteRoom];
 		this.staff = new Staff[this.numStaff];
 		this.totalMoney = 10000;
 	}
-	
+
 	public void addRooms() {
 		for(int i=0; i<this.numTwoGuestRoom; i++) {
-		      this.rooms.add(new TwoGuestRoom());
+		      this.rooms[i] = new TwoGuestRoom();
 		}
-		for(int i=0; i<this.numFourGuestRoom; i++) {
-		      this.rooms.add(new FourGuestRoom());
+		for(int i=this.numTwoGuestRoom; i<this.numFourGuestRoom + this.numTwoGuestRoom; i++) {
+		      this.rooms[i] = new FourGuestRoom();
 		}
-		for(int i=0; i<this.numSuiteRoom; i++) {
-		      this.rooms.add(new SuiteRoom());
+		for(int i=this.numTwoGuestRoom + this.numFourGuestRoom; i<this.rooms.length; i++) {
+		      this.rooms[i] = new SuiteRoom();
 		}
 	}
-	
+
 	public void setRoomNumbers() {
-		for (int i = 0; i < this.rooms.size(); i++) {
-			this.rooms.get(i).setRoomNumber(i + 1);
+		for (int i = 0; i < this.rooms.length; i++) {
+			this.rooms[i].setRoomNumber(i + 1);
 		}
 	}
-	
+
 	public double getTotalMoney() {
 		return this.totalMoney;
 	}
-	
+
 	public void setTotalMoney(int value) {
 		this.totalMoney = value;
 	}
-	
+
 	public void printHotel() {
 		//test
 		System.out.println("Two Guest Rooms: " + this.numTwoGuestRoom);
@@ -58,25 +58,25 @@ public class Hotel {
 		System.out.println("Suite Rooms: " + this.numSuiteRoom);
 		System.out.println("Staff: " + this.numStaff);
 	}
-	
+
 	public Guest createGuest(int numDaysCheckIn) {
 		Guest guest = new Guest(numDaysCheckIn);
 		return guest;
 	}
-	
+
 	public void checkIn(int randNum, int numDaysCheckIn, String roomType) {
-		for (int i = 0; i < this.rooms.size(); i++ ) {
-			if (this.rooms.get(i).type == roomType) {
-				if (this.rooms.get(i).available) {
+		for (int i = 0; i < this.rooms.length; i++ ) {
+			if (this.rooms[i].type == roomType) {
+				if (this.rooms[i].available) {
 					for (int j = 0; j < randNum; j++) {
 						Guest guest = this.createGuest(numDaysCheckIn);
-						this.rooms.get(i).addGuests(guest);
+						this.rooms[i].addGuests(guest);
 					}
-					this.rooms.get(i).setNumDaysCounter(numDaysCheckIn);
+					this.rooms[i].setNumDaysCounter(numDaysCheckIn);
 					break;
 				}
-				/*
-				if (!this.rooms.get(i).available) {
+				//think I know what the problem is
+				else if (!this.rooms[i].available) {
 					System.out.println("Room unavailable.");
 					break;
 				}
@@ -84,7 +84,7 @@ public class Hotel {
 			}
 		}
 	}
-	
+
 	public void determineRoomType(int randNum, int numDaysCheckIn) {
 		if (0 < randNum && randNum < 3) {
 			this.checkIn(randNum, numDaysCheckIn, "Two Guest Room");
@@ -95,18 +95,18 @@ public class Hotel {
 		else if (4 < randNum && randNum < 9) {
 			this.checkIn(randNum, numDaysCheckIn, "Suite Room");
 		}
-		for (int a = 0; a < this.rooms.size(); a++ ) {
-			if (this.rooms.get(a).numOfPeople > 0) {
-				this.rooms.get(a).setAvailable(false);
+		for (int a = 0; a < this.rooms.length; a++ ) {
+			if (this.rooms[a].numOfPeople > 0) {
+				this.rooms[a].setAvailable(false);
 			}
 		}
 	}
-	
+
 	public void updateGuestCounters() {
-		for (int i = 0; i < this.rooms.size(); i++) {
-			this.rooms.get(i).setNumDaysCounter(this.rooms.get(i).numDaysCounter - 1);
-			if (this.rooms.get(i).numDaysCounter == 0) {
-				this.rooms.get(i).checkOut();
+		for (int i = 0; i < this.rooms.length; i++) {
+			this.rooms[i].setNumDaysCounter(this.rooms[i].numDaysCounter - 1);
+			if (this.rooms[i].numDaysCounter == 0) {
+				this.rooms[i].checkOut();
 			}
 		}
 	}

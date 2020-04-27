@@ -44,27 +44,26 @@ public class HotelSimulation {
 		for (int i = 1; i < numDays + 1; i++) {
 			for (int j = 0; j < 10; j++) {
 				System.out.println("Day " + i + "." + j);
-				hotel.updateGuestCounters();
 				int randNum = generateRandomNumber(random);
-				int numDaysCheckIn = random.nextInt(7) + 1;
+				//int numDaysCheckIn = random.nextInt(7) + 1;
+				int numDaysCheckIn = random.nextInt(3) + 1;
 				if (randNum > 0) {
 					System.out.println("A group of " + randNum + " guests want to check in for " + numDaysCheckIn + " days.");
 				}
-				hotel.determineRoomType(randNum, numDaysCheckIn);
-				
-				
-				}
-
+				hotel.determineRoomType(randNum, numDaysCheckIn);	
+			}
 				//people who are gone come back
 				//random chance for people to go to restaurant, pool
 				//staff clean rooms
-				
-			}
-			//1,2,3,4
-			for (int j = 0; j < hotel.rooms.size(); j++) {
-				System.out.println(hotel.rooms.get(j).toStringRoomOccupancy());
-			}
+			hotel.updateGuestCounters();	
 		}
+			//1,2,3,4
+		
+		for (int j = 0; j < hotel.rooms.length; j++) {
+			System.out.println(hotel.rooms[j].toStringRoomOccupancy());
+		}
+		System.out.println("done");
+	}
 	
 	public static int generateRandomNumber(Random random) {
 		int randNum = 0;
