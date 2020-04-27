@@ -37,20 +37,22 @@ public class HotelSimulation {
 		Hotel hotel = new Hotel(numTwoGuestRooms, numFourGuestRooms, numSuiteRooms, numStaff);
 		hotel.addRooms();
 		hotel.setRoomNumbers();
-		for (int i = 0; i < hotel.rooms.size(); i++) {
-			System.out.println(hotel.rooms.get(i).detailedToString());
-		}
-		
+		//for (int i = 0; i < hotel.rooms.size(); i++) {
+			//System.out.println(hotel.rooms.get(i).detailedToString());
+		//}
 		
 		for (int i = 1; i < numDays + 1; i++) {
 			for (int j = 0; j < 10; j++) {
 				System.out.println("Day " + i + "." + j);
+				hotel.updateGuestCounters();
 				int randNum = generateRandomNumber(random);
 				int numDaysCheckIn = random.nextInt(7) + 1;
 				if (randNum > 0) {
 					System.out.println("A group of " + randNum + " guests want to check in for " + numDaysCheckIn + " days.");
 				}
-				determineRoomType(hotel, randNum, numDaysCheckIn);
+				hotel.determineRoomType(randNum, numDaysCheckIn);
+				
+				
 				}
 
 				//people who are gone come back
@@ -63,18 +65,6 @@ public class HotelSimulation {
 				System.out.println(hotel.rooms.get(j).toStringRoomOccupancy());
 			}
 		}
-	
-	public static void checkIn(Hotel hotel, int randNum, int numDaysCheckIn, String roomType) {
-		for (int i = 0; i < hotel.rooms.size(); i++ ) {
-			if (hotel.rooms.get(i).type == roomType && hotel.rooms.get(i).available) {
-				for (int j = 0; j < randNum; j++) {
-					Guest guest = hotel.createGuest(numDaysCheckIn);
-					hotel.rooms.get(i).addGuests(guest);
-				}
-				break;
-			}
-		}
-	}
 	
 	public static int generateRandomNumber(Random random) {
 		int randNum = 0;
@@ -93,24 +83,4 @@ public class HotelSimulation {
 		}
 		return randNum;
 	}
-	
-	public static void determineRoomType(Hotel hotel, int randNum, int numDaysCheckIn) {
-		if (0 < randNum && randNum < 3) {
-			checkIn(hotel, randNum, numDaysCheckIn, "Two Guest Room");
-		}
-		else if (2 < randNum && randNum < 5) {
-			checkIn(hotel, randNum, numDaysCheckIn, "Four Guest Room");
-		}
-		else if (4 < randNum && randNum < 9) {
-			checkIn(hotel, randNum, numDaysCheckIn, "Suite Room");
-		}
-		for (int a = 0; a < hotel.rooms.size(); a++ ) {
-			if (hotel.rooms.get(a).numOfPeople > 0) {
-				hotel.rooms.get(a).setAvailable(false);
-			}
-		}
-	}
-	
-
-
 }

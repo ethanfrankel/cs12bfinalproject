@@ -63,5 +63,50 @@ public class Hotel {
 		Guest guest = new Guest(numDaysCheckIn);
 		return guest;
 	}
+	
+	public void checkIn(int randNum, int numDaysCheckIn, String roomType) {
+		for (int i = 0; i < this.rooms.size(); i++ ) {
+			if (this.rooms.get(i).type == roomType) {
+				if (this.rooms.get(i).available) {
+					for (int j = 0; j < randNum; j++) {
+						Guest guest = this.createGuest(numDaysCheckIn);
+						this.rooms.get(i).addGuests(guest);
+					}
+					this.rooms.get(i).setNumDaysCounter(numDaysCheckIn);
+					break;
+				}
+				else if (!this.rooms.get(i).available) {
+					System.out.println("Room unavailable.");
+					break;
+				}
+			}
+		}
+	}
+	
+	public void determineRoomType(int randNum, int numDaysCheckIn) {
+		if (0 < randNum && randNum < 3) {
+			this.checkIn(randNum, numDaysCheckIn, "Two Guest Room");
+		}
+		else if (2 < randNum && randNum < 5) {
+			this.checkIn(randNum, numDaysCheckIn, "Four Guest Room");
+		}
+		else if (4 < randNum && randNum < 9) {
+			this.checkIn(randNum, numDaysCheckIn, "Suite Room");
+		}
+		for (int a = 0; a < this.rooms.size(); a++ ) {
+			if (this.rooms.get(a).numOfPeople > 0) {
+				this.rooms.get(a).setAvailable(false);
+			}
+		}
+	}
+	
+	public void updateGuestCounters() {
+		for (int i = 0; i < this.rooms.size(); i++) {
+			this.rooms.get(i).setNumDaysCounter(this.rooms.get(i).numDaysCounter - 1);
+			if (this.rooms.get(i).numDaysCounter == 0) {
+				this.rooms.get(i).checkOut();
+			}
+		}
+	}
 
 }

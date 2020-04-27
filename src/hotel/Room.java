@@ -7,6 +7,7 @@ public class Room {
 	int roomNumber;
 	int price;
 	int numOfPeople;
+	int numDaysCounter;
 	boolean cleaned;
 	boolean available;
 	boolean occupied;
@@ -49,9 +50,22 @@ public class Room {
 		this.occupied = value;
 	}
 	
+	public void setNumDaysCounter(int value) {
+		this.numDaysCounter = value;
+	}
+	
 	public void addGuests(Guest guest) {
 		this.occupants.add(guest);
 		this.numOfPeople++;
+	}
+	
+	public void checkOut() {
+		for (int i = 0; i < this.occupants.size(); i++) {
+			this.occupants.remove(i);
+			this.numOfPeople--;
+			this.available = true;
+		}
+		System.out.println(this.toString() + " has checked out.");
 	}
 	
 	public String toString() {
