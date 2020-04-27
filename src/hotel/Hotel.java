@@ -75,6 +75,7 @@ public class Hotel {
 					this.rooms[i].setNumDaysCounter(numDaysCheckIn);
 					break;
 				}
+				//think I know what the problem is
 				else if (!this.rooms[i].available) {
 					System.out.println("Room unavailable.");
 					break;
