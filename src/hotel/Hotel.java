@@ -62,35 +62,35 @@ public class Hotel {
 		return guest;
 	}
 	
-	public void checkIn(int randNum, int numDaysCheckIn, String roomType) {
+	public void checkIn(int randNum, int numDaysCheckIn, String roomType, int roomTypeNum) {
+		int counter = 0;
 		for (int i = 0; i < this.rooms.length; i++ ) {
-			if (this.rooms[i].type == roomType) {
-				if (this.rooms[i].available) {
-					for (int j = 0; j < randNum; j++) {
-						Guest guest = this.createGuest(numDaysCheckIn);
-						this.rooms[i].addGuests(guest);
-					}
-					this.rooms[i].setNumDaysCounter(numDaysCheckIn);
-					break;
+			if (this.rooms[i].type == roomType && this.rooms[i].available) {
+				for (int j = 0; j < randNum; j++) {
+					Guest guest = this.createGuest(numDaysCheckIn);
+					this.rooms[i].addGuests(guest);
 				}
-				//think I know what the problem is
-				else if (!this.rooms[i].available) {
-					System.out.println("Room unavailable.");
-					break;
-				}
+				this.rooms[i].setNumDaysCounter(numDaysCheckIn);
+				break;
 			}
+			else if (this.rooms[i].type == roomType && !this.rooms[i].available) {
+				counter++;
+			}
+		}
+		if (counter == roomTypeNum) {
+			System.out.println("Room unavailable.");
 		}
 	}
 	
 	public void determineRoomType(int randNum, int numDaysCheckIn) {
 		if (0 < randNum && randNum < 3) {
-			this.checkIn(randNum, numDaysCheckIn, "Two Guest Room");
+			this.checkIn(randNum, numDaysCheckIn, "Two Guest Room", this.numTwoGuestRoom);
 		}
 		else if (2 < randNum && randNum < 5) {
-			this.checkIn(randNum, numDaysCheckIn, "Four Guest Room");
+			this.checkIn(randNum, numDaysCheckIn, "Four Guest Room", this.numFourGuestRoom);
 		}
 		else if (4 < randNum && randNum < 9) {
-			this.checkIn(randNum, numDaysCheckIn, "Suite Room");
+			this.checkIn(randNum, numDaysCheckIn, "Suite Room", this.numSuiteRoom);
 		}
 		for (int a = 0; a < this.rooms.length; a++ ) {
 			if (this.rooms[a].numOfPeople > 0) {
