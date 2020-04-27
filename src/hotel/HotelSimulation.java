@@ -2,6 +2,7 @@ package hotel;
 
 import java.util.Random;
 import java.util.Scanner;
+//test
 
 public class HotelSimulation {
 	/**
