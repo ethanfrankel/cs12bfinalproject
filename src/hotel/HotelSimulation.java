@@ -3,7 +3,7 @@ package hotel;
 import java.util.Random;
 import java.util.Scanner;
 //test
-
+//test 2
 public class HotelSimulation {
 	/**
 	 *two tick system
