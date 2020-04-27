@@ -7,9 +7,8 @@ public class Guest extends People{
 	 * 
 	 */
 
-	public Guest(double numDaysCheckIn) {
+	public Guest(double numDaysCheckedIn) {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 }
