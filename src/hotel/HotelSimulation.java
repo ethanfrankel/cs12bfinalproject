@@ -67,6 +67,12 @@ public class HotelSimulation {
 				}
 				hotel.determineRoomType(randNum, numDaysCheckIn, dayNotation);	
 			}
+			System.out.println("Day "+ i + " is over");
+			System.out.println("Type: [1] Start next day [2] Customer Activity Report [3] Staff Activity Report [4] Financial Report");
+			int choice  = in.nextInt();
+			if(choice == 1) {
+				continue;
+			}
 				//random chance for people to go to restaurant, pool
 				//staff clean rooms
 			
