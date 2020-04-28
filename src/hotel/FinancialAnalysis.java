@@ -69,8 +69,18 @@ public class FinancialAnalysis {
 	}
 
 	
-	public void financialOverview(int numStaff, int numDays, int totalGuests, int totalCustomers, double initialMoney) { //not done
+	public void financialOverview(int numStaff, int numDays, int totalGuests, int totalCustomers) { //not done
 		this.profit = this.totalRevenue - this.explicitCosts;
+		System.out.println("\r\n " + "***Overview of Hotel Opporations***");
+		System.out.println("Total Hotel Guests: " + totalGuests);
+		System.out.println("Total Restaurant Customers: " + totalCustomers);
+		System.out.println("Total Paid Staff: " + numStaff);
+		System.out.println("Length of Simulation: " + numDays + " day(s)");
+		System.out.println("***Financial Overview***");
+		System.out.printf("%-30s %-10f %n", "Total Revenue: ", this.totalRevenue);
+		System.out.printf("%-30s %-10f %n", "Total (explicit) Costs: ", this.explicitCosts);
+		System.out.printf("%-30s %-10f %n", "Total Profit: ", this.profit);
+		System.out.println("\r\n" + "Current Account Balance of the Hotel: " + this.currentAccountBalance);
 		
 		
 	}
