@@ -1,7 +1,6 @@
 package hotel;
 
 public class People {
-	String name;
 	double balance;
 
 	protected People() {

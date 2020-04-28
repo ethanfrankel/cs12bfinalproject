@@ -7,7 +7,7 @@ public class FinancialAnalysis {
 	double dailyFixedRestaurantCosts = 150.0; //per big tick
 	double totalRestaurantCosts;
 	double staffSalary = 100.0; //per big tick
-	double totalStaffComp;//comp=compensation
+	double totalStaffComp; //comp=compensation
 	double explicitCosts;
 	double hotelRevenue;
 	double restaurantRevenue;
@@ -43,8 +43,9 @@ public class FinancialAnalysis {
 		return dayCosts;
 	}
 	
-	public void calculateCurrentAccountBalance(double dayRevenue, double dayCosts) {
+	public double calculateCurrentAccountBalance(double dayRevenue, double dayCosts) {
 		this.currentAccountBalance = this.currentAccountBalance + dayRevenue - dayCosts;
+		return this.currentAccountBalance;
 	}
 	
 	public double getCurrentAccountBalance() { 
@@ -77,9 +78,9 @@ public class FinancialAnalysis {
 		System.out.println("Total Paid Staff: " + numStaff);
 		System.out.println("Length of Simulation: " + numDays + " day(s)");
 		System.out.println("\r\n " + "***Financial Overview***");
-		System.out.printf("%-30s %-10f %n", "Total Revenue: ", this.totalRevenue);
-		System.out.printf("%-30s %-10f %n", "Total (explicit) Costs: ", this.explicitCosts);
-		System.out.printf("%-30s %-10f %n", "Total Profit: ", this.profit);
+		System.out.printf("%-30s %-10.2f %n", "Total Revenue: ", this.totalRevenue);
+		System.out.printf("%-30s %-10.2f %n", "Total (explicit) Costs: ", this.explicitCosts);
+		System.out.printf("%-30s %-10.2f %n", "Total Profit: ", this.profit);
 		System.out.println("\r\n" + "Current Account Balance of the Hotel: " + this.currentAccountBalance);
 		
 		

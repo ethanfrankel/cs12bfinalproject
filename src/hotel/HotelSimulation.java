@@ -57,15 +57,22 @@ public class HotelSimulation {
 				double dayNotation = Double.parseDouble(dayLittleTick);
 				System.out.println("Day " + dayNotation);
 				int randNum = generateRandomNumber(random);
-				//int numDaysCheckIn = random.nextInt(7) + 1;
+				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
 				double numDaysCheckIn = (double) random.nextInt(3) + 1;
 				
+				int randRestaurantNum = generateRandomNumber(random);
+				
+				
 				hotel.updateGuestCounters();	
+				//updateCustomerCounters
 				
 				if (randNum > 0) {
 					System.out.println("A group of " + randNum + " guests want to check in for " + (int) numDaysCheckIn + " days.");
+					hotel.determineRoomType(randNum, numDaysCheckIn, dayNotation);
 				}
-				hotel.determineRoomType(randNum, numDaysCheckIn, dayNotation);	
+				
+				
+					
 			}
 			System.out.println("Day "+ i + " is over");
 			System.out.println("Type: [1] Start next day [2] Customer Activity Report [3] Staff Activity Report [4] Financial Report");
@@ -80,13 +87,21 @@ public class HotelSimulation {
 				//staff activity report
 			}
 			else if (choice == 4) {
-				//financial analysis
+				double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
+				double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
+				double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts);
+				System.out.println("Day " + i + " revenue: " + dayRevenue);
+				System.out.println("Day " + i + " costs: " + dayCosts);
+				System.out.println("Current Account Balance: " + currentAccountBalance);
 			}
 				//random chance for people to go to restaurant, pool
 				//staff clean rooms
 			
 			//1,2,3,4
 		}
+		hotel.financialAnalysis.calcExplicitCosts(numStaff, numDays);
+		hotel.financialAnalysis.calcTotalRevenue(hotel.initialMoney);
+		hotel.financialAnalysis.financialOverview(hotel.numStaff, numDays, hotel.totalGuests, 100);
 		
 		/*
 		for (int j = 0; j < hotel.rooms.length; j++) {

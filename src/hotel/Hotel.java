@@ -13,6 +13,8 @@ public class Hotel {
 	Pool pool;
 	Staff[] staff;
 	int numStaff;
+	int totalGuests;
+	int totalCustomers;
 	double initialMoney;
 	int numTwoGuestRoom;
 	int numFourGuestRoom;
@@ -32,6 +34,8 @@ public class Hotel {
 		this.numSuiteRoom = numSuiteRoom;
 		this.rooms = new Room[numTwoGuestRoom + numFourGuestRoom + numSuiteRoom];
 		this.staff = new Staff[this.numStaff];
+		this.totalGuests = 0;
+		this.totalCustomers = 0;
 	}
 
 	public void addRooms() {
@@ -70,6 +74,7 @@ public class Hotel {
 	
 	public Guest createGuest(double numDaysCheckIn, String guestName) {
 		Guest guest = new Guest(numDaysCheckIn, guestName);
+		this.totalGuests++;
 		return guest;
 	}
 	
