@@ -20,11 +20,11 @@ public class FinancialAnalysis {
 	 * for current analysis when prompted by user
 	 */
 	
-	public FinancialAnalysis() {
-		
+	public FinancialAnalysis(double initialMoney) {
+		this.currentAccountBalance = initialMoney;
 	}
 	
-	public double dayRevenue(Room[] rooms, Restaurant restaurant) { //not done
+	public double dayRevenue(Room[] rooms, Restaurant restaurant) { //add restaurant calcs
 		double roomEarnings = 0;
 		double restaurantEarnings = 0;
 		for (int i = 0; i < rooms.length; i++) {
@@ -37,14 +37,14 @@ public class FinancialAnalysis {
 		return dayRevenue;
 	}
 
-	public double dayCosts(int numStaff) {
+	public double dayCosts(int numStaff) { //add restaurant calcs
 		//calculated at end of day: dailyFixedHotelCosts + dailyFixedRestaurantCosts + staffSalary(numStaff)
 		double dayCosts = this.dailyFixedHotelCosts + this.dailyFixedRestaurantCosts + (this.staffSalary * numStaff);
 		return dayCosts;
 	}
 	
-	public void calculateCurrentAccountBalance(double initialMoney, double dayRevenue, double dayCosts) { //not done
-		this.currentAccountBalance = initialMoney + dayRevenue + dayCosts;
+	public void calculateCurrentAccountBalance(double dayRevenue, double dayCosts) {
+		this.currentAccountBalance = this.currentAccountBalance + dayRevenue - dayCosts;
 	}
 	
 	public double getCurrentAccountBalance() { 
@@ -56,16 +56,16 @@ public class FinancialAnalysis {
 	 * for final analysis at the end
 	 */
 	
-	public void calcExplicitCosts(int numStaff, int numDays) { //complete
-		this.totalStaffComp = this.staffSalary * numStaff ;
+	public void calcExplicitCosts(int numStaff, int numDays) { 
+		this.totalStaffComp = this.staffSalary * numStaff * numDays;
 		this.totalHotelCosts = this.dailyFixedHotelCosts * numDays;
 		this.totalRestaurantCosts = this.dailyFixedRestaurantCosts * numDays;
 		this.explicitCosts = this.totalHotelCosts + this.totalRestaurantCosts + this.totalStaffComp;
 	}
 	
 	
-	public void calcTotalRevenue() { //not done
-		
+	public void calcTotalRevenue(double initialMoney) { 
+		this.totalRevenue = this.currentAccountBalance - initialMoney + this.explicitCosts;
 	}
 
 	

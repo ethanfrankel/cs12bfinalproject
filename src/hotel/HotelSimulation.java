@@ -69,10 +69,18 @@ public class HotelSimulation {
 			}
 			System.out.println("Day "+ i + " is over");
 			System.out.println("Type: [1] Start next day [2] Customer Activity Report [3] Staff Activity Report [4] Financial Report");
-			int choice  = in.nextInt();
-			//switch statement replaces if statements
-			if(choice == 1) {
+			int choice = in.nextInt();
+			if (choice == 1) {
 				continue;
+			}
+			else if (choice == 2) {
+				//customer activity report
+			}
+			else if (choice == 3) {
+				//staff activity report
+			}
+			else if (choice == 4) {
+				//financial analysis
 			}
 				//random chance for people to go to restaurant, pool
 				//staff clean rooms
