@@ -76,7 +76,7 @@ public class FinancialAnalysis {
 		System.out.println("Total Restaurant Customers: " + totalCustomers);
 		System.out.println("Total Paid Staff: " + numStaff);
 		System.out.println("Length of Simulation: " + numDays + " day(s)");
-		System.out.println("***Financial Overview***");
+		System.out.println("\r\n " + "***Financial Overview***");
 		System.out.printf("%-30s %-10f %n", "Total Revenue: ", this.totalRevenue);
 		System.out.printf("%-30s %-10f %n", "Total (explicit) Costs: ", this.explicitCosts);
 		System.out.printf("%-30s %-10f %n", "Total Profit: ", this.profit);
