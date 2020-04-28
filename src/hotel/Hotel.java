@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Hotel {
+	FinancialAnalysis financialAnalysis;
 	Random random;
 	Room[] rooms;
 	Restaurant restaurant;
@@ -20,6 +21,7 @@ public class Hotel {
 	public static final int NUM_NAMES = 3000;
 
 	public Hotel(int numTwoGuestRoom, int numFourGuestRoom, int numSuiteRoom, int numStaff) throws FileNotFoundException {
+		this.financialAnalysis = new FinancialAnalysis();
 		this.random = new Random();
 		this.restaurant = new Restaurant();
 		this.pool = new Pool();
@@ -31,7 +33,7 @@ public class Hotel {
 		this.staff = new Staff[this.numStaff];
 		this.initialMoney = 10000;
 	}
-	
+
 	public void addRooms() {
 		for(int i=0; i<this.numTwoGuestRoom; i++) {
 		      this.rooms[i] = new TwoGuestRoom();

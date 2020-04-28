@@ -6,7 +6,7 @@ public class FinancialAnalysis {
 	double totalHotelCosts;
 	double dailyFixedRestaurantCosts = 150.0; //per big tick
 	double totalRestaurantCosts;
-	double staffSalary = 10.0; //per small tick
+	double staffSalary = 100.0; //per big tick
 	double totalStaffComp;//comp=compensation
 	double explicitCosts;
 	double hotelRevenue;
@@ -16,24 +16,38 @@ public class FinancialAnalysis {
 	double numSmallTicks;
 	double currentAccountBalance;
 	
-	public FinancialAnalysis() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	/**
 	 * for current analysis when prompted by user
 	 */
 	
-	public void earningsPerRoom() { //not done
-		//calculated at end of day (price of room per day
+	public FinancialAnalysis() {
 		
 	}
 	
-	public void setCurrentAccountBalance(double currentTime, double initialMoney) { //not done
-		
+	public double dayRevenue(Room[] rooms, Restaurant restaurant) { //not done
+		double roomEarnings = 0;
+		double restaurantEarnings = 0;
+		for (int i = 0; i < rooms.length; i++) {
+			if (!rooms[i].available) {
+				roomEarnings = roomEarnings + rooms[i].price;
+			}
+		}
+		//restaurant calcs
+		double dayRevenue = roomEarnings + restaurantEarnings;
+		return dayRevenue;
+	}
+
+	public double dayCosts(int numStaff) {
+		//calculated at end of day: dailyFixedHotelCosts + dailyFixedRestaurantCosts + staffSalary(numStaff)
+		double dayCosts = this.dailyFixedHotelCosts + this.dailyFixedRestaurantCosts + (this.staffSalary * numStaff);
+		return dayCosts;
 	}
 	
-	public double getCurrentAccountBalance() { //complete
+	public void calculateCurrentAccountBalance(double initialMoney, double dayRevenue, double dayCosts) { //not done
+		this.currentAccountBalance = initialMoney + dayRevenue + dayCosts;
+	}
+	
+	public double getCurrentAccountBalance() { 
 		return currentAccountBalance;
 	}
 	
@@ -43,8 +57,7 @@ public class FinancialAnalysis {
 	 */
 	
 	public void calcExplicitCosts(int numStaff, int numDays) { //complete
-		this.numSmallTicks = 10 * numDays;
-		this.totalStaffComp = this.staffSalary * this.numSmallTicks * numStaff ;
+		this.totalStaffComp = this.staffSalary * numStaff ;
 		this.totalHotelCosts = this.dailyFixedHotelCosts * numDays;
 		this.totalRestaurantCosts = this.dailyFixedRestaurantCosts * numDays;
 		this.explicitCosts = this.totalHotelCosts + this.totalRestaurantCosts + this.totalStaffComp;
