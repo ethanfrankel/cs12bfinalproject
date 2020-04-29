@@ -151,9 +151,9 @@ public class Hotel {
 		this.restaurant.clearRestaurant();
 	}
 	
-	public void handleCustomers(int customerRestaurantProbability, int randCustomerNum) throws FileNotFoundException {
+	public void movePeople(int guestRestaurantOdds, int customerRestaurantOdds, int guestPoolOdds, int randCustomerNum) throws FileNotFoundException {
 		int customerProbability = random.nextInt(10) + 1;
-		if (customerProbability <= customerRestaurantProbability) {
+		if (customerProbability <= customerRestaurantOdds) {
 			for (int k = 0; k < randCustomerNum; k++) {
 				String customerName = this.randomName();
 				Customer customer = this.createCustomer(customerName);
@@ -161,6 +161,7 @@ public class Hotel {
 			}
 			System.out.println("A group of " + randCustomerNum + " customers entered the restaurant");
 		}
+		//int guest
 	}
 
 }

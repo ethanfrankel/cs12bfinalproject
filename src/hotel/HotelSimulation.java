@@ -17,8 +17,9 @@ public class HotelSimulation {
 	 * @throws FileNotFoundException 
 	 */
 	
-	public static final int PROBABILITY_GUEST_RESTAURANT = 2;
-	public static final int PROBABILITY_CUSTOMER_RESTAURANT = 4;
+	public static final int ODDS_GUEST_RESTAURANT = 2;
+	public static final int ODDS_CUSTOMER_RESTAURANT = 4;
+	public static final int ODDS_GUEST_POOL = 2;
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		
@@ -73,7 +74,7 @@ public class HotelSimulation {
 				}
 				
 				int randCustomerNum = generateRandomNumberCustomer(random);
-				hotel.handleCustomers(PROBABILITY_CUSTOMER_RESTAURANT, randCustomerNum);
+				hotel.movePeople(ODDS_GUEST_RESTAURANT, ODDS_CUSTOMER_RESTAURANT, ODDS_GUEST_POOL, randCustomerNum);
 				
 					
 			}
@@ -90,6 +91,8 @@ public class HotelSimulation {
 				}
 				else if (choice == 3) {
 					//staff activity report
+					System.out.println("\r\n" + "***Staff Activity Report***");
+					System.out.println("TBD..." + "\r\n");
 					choice = userChoices();
 				}
 				else if (choice == 4) {
@@ -105,10 +108,6 @@ public class HotelSimulation {
 				}
 			}
 			continue;
-				//random chance for people to go to restaurant, pool
-				//staff clean rooms
-			
-			//1,2,3,4
 		}
 		hotel.financialAnalysis.calcExplicitCosts(numStaff, numDays);
 		hotel.financialAnalysis.calcTotalRevenue(hotel.initialMoney);
