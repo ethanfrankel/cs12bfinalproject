@@ -6,11 +6,20 @@ public class Guest extends People{
 	 * how long they stay 
 	 * 
 	 */
-	String name;
+	double numDaysStay;
+	double timeAtCheckIn;
 
-	public Guest(double numDaysCheckedIn, String guestName) {
+	public Guest(double timeAtCheckIn, double numDaysCheckedIn, String guestName) {
 		super();
+		this.type = "Guest";
 		this.name = guestName;
+		this.numDaysStay = numDaysCheckedIn;
+		this.timeAtCheckIn = timeAtCheckIn;
+	}
+	
+	public void setTimeAtCheckIn(double value) {
+		this.timeAtCheckIn = value;
+		this.currentTimeCounter = value;
 	}
 	
 	public String toString() {

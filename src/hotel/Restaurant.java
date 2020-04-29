@@ -20,23 +20,23 @@ public class Restaurant {
 			}
 		}
 		else {
-			System.out.println("Sorry. The restaurant does not have enough space to seat a group of " + newCustomers.size());
+			System.out.println("The restaurant does not have enough space to seat a group of " + newCustomers.size());
 		}
 	}
 	
 	//adds customers not in hotel into the restaurant
-	public void addToRestaurant() {
-		//if 
+	public void addCustomerToRestaurant(Customer customer) {
+		this.occupants.add(customer);
 	}
 	
-	/*
-	public Customer removeFromRestaurant(int i) {
+	//currently not working
+	public void removeFromRestaurant(Room room) {
 		Customer c = this.occupants.get(i);
 		this.occupants.remove(i);
 		System.out.println(this.occupants.get(i).name + "has left the Restaurant.");
 		return c; 
 	}
-	*/
+
 
 	public String toString() {
 		return "Restaurant has" + " " + this.occupants.size() + " " + "occupants currently.";

@@ -72,10 +72,16 @@ public class Hotel {
 		System.out.println("Staff: " + this.numStaff);
 	}
 	
-	public Guest createGuest(double numDaysCheckIn, String guestName) {
-		Guest guest = new Guest(numDaysCheckIn, guestName);
+	public Guest createGuest(double timeAtCheckIn, double numDaysCheckIn, String guestName) {
+		Guest guest = new Guest(timeAtCheckIn, numDaysCheckIn, guestName);
 		this.totalGuests++;
 		return guest;
+	}
+	
+	public Customer createCustomer(String guestName) {
+		Customer customer = new Customer(guestName);
+		this.totalCustomers++;
+		return customer;
 	}
 	
 	public String randomName() throws FileNotFoundException {
@@ -101,12 +107,10 @@ public class Hotel {
 					//call function to generate random name
 					String guestName = this.randomName();
 					System.out.println(guestName);
-					Guest guest = this.createGuest(numDaysCheckIn, guestName);
+					Guest guest = this.createGuest(dayNotation, numDaysCheckIn, guestName);
 					this.rooms[i].addGuests(guest);
 				}
 				System.out.println("The " + randNum + " guests checked in " + this.rooms[i].detailedToString());
-				this.rooms[i].setNumDaysStay(numDaysCheckIn);
-				this.rooms[i].setTimeAtCheckIn(dayNotation);
 				this.rooms[i].setAvailable(false);
 				break;
 			}
@@ -131,14 +135,35 @@ public class Hotel {
 		}
 	}
 	
-	public void updateGuestCounters() {
+	public void updateCounters() {
+		//updates every Guest in hotel
 		for (int i = 0; i < this.rooms.length; i++) {
 			if (!this.rooms[i].available) {
-				this.rooms[i].setCurrentTimeCounter(this.rooms[i].currentTimeCounter + 0.10);
-				if (this.rooms[i].currentTimeCounter >= this.rooms[i].timeAtCheckIn + this.rooms[i].numDaysStay) {
-					this.rooms[i].checkOut();
+				for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
+					this.rooms[i].occupants.get(j).setCurrentTimeCounter(this.rooms[i].occupants.get(j).currentTimeCounter + 0.10);
+					if (this.rooms[i].occupants.get(j).currentTimeCounter >= this.rooms[i].occupants.get(j).timeAtCheckIn + this.rooms[i].occupants.get(j).numDaysStay) {
+						this.rooms[i].checkOut();
+					}
+					if (this.rooms[i].occupants.get(j).currentTimeCounter >= this.rooms[i].occupants.get(j).timeEnterRestaurant + 0.10) {
+						this.restaurant.removeFromRestaurant(this.rooms[i]);
+					}
 				}
 			}
+		}
+		
+		//updates every customer in restaurant (since customers can only exist if in restaurant)
+		
+	}
+	
+	public void handleCustomers(int customerRestaurantProbability, int randCustomerNum) throws FileNotFoundException {
+		int customerProbability = random.nextInt(10) + 1;
+		if (customerProbability <= customerRestaurantProbability) {
+			for (int k = 0; k < randCustomerNum; k++) {
+				String customerName = this.randomName();
+				Customer customer = this.createCustomer(customerName);
+				this.restaurant.addCustomerToRestaurant(customer);
+			}
+			System.out.println("A group of " + randCustomerNum + " customers entered the restaurant");
 		}
 	}
 

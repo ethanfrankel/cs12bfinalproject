@@ -17,6 +17,9 @@ public class HotelSimulation {
 	 * @throws FileNotFoundException 
 	 */
 	
+	public static final int PROBABILITY_GUEST_RESTAURANT = 2;
+	public static final int PROBABILITY_CUSTOMER_RESTAURANT = 4;
+	
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		Random random = new Random();
@@ -60,10 +63,8 @@ public class HotelSimulation {
 				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
 				double numDaysCheckIn = (double) random.nextInt(3) + 1;
 				
-				int randRestaurantNum = generateRandomNumber(random);
 				
-				
-				hotel.updateGuestCounters();	
+				hotel.updateCounters();	
 				//updateCustomerCounters
 				
 				if (randNum > 0) {
@@ -71,6 +72,8 @@ public class HotelSimulation {
 					hotel.determineRoomType(randNum, numDaysCheckIn, dayNotation);
 				}
 				
+				int randCustomerNum = generateRandomNumberCustomer(random);
+				hotel.handleCustomers(PROBABILITY_CUSTOMER_RESTAURANT, randCustomerNum);
 				
 					
 			}
@@ -126,6 +129,21 @@ public class HotelSimulation {
 			randNum = random.nextInt(4) + 5;
 		}
 		return randNum;
+	}
+	
+	public static int generateRandomNumberCustomer(Random random) {
+		int randCustomerNum = 0;
+		int randPercentage = random.nextInt(5);
+		if (0 <= randPercentage && randPercentage < 2) {
+			randCustomerNum = random.nextInt(2) + 1;
+		}
+		else if (2 <= randPercentage && randPercentage < 4) {
+			randCustomerNum = random.nextInt(2) + 3;
+		}
+		else if (randPercentage == 4) {
+			randCustomerNum = random.nextInt(4) + 5;
+		}
+		return randCustomerNum;
 	}
 	
 }

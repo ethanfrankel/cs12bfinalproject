@@ -4,8 +4,12 @@ import java.util.Random;
 
 public class Customer extends People{
 	
-	protected Customer() {
+	public Customer(String customerName) {
 		super();
+		this.type = "Customer";
+		this.name = customerName;
 	}
+	
+	
 
 }
