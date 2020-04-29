@@ -80,37 +80,40 @@ public class HotelSimulation {
 			}
 			hotel.restaurant.resetDaySales();
 			System.out.println("Day "+ i + " is over");
-			int choice = userChoices();
 			double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
 			double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
 			double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts);
-			while(choice != 1) {
-				if (choice == 2) {
-					//customer and guest activity report
-					System.out.println("\r\n" + "***Customer and Guest Activity Report***");
-					System.out.println("\r\n" + "***Check In/Check Out***");
-					//check in and check out 
-					System.out.println("\r\n" + "***Restaurant Activity***");
-					//restaurant activity
-					System.out.println("\r\n" + "***Pool Activity***");
-					//pool activity
-					choice = userChoices();
+			if(i < numDays) {
+				int choice = userChoices();
+				while(choice != 1) {
+					if (choice == 2) {
+						//customer and guest activity report
+						System.out.println("\r\n" + "***Customer and Guest Activity Report***");
+						System.out.println("\r\n" + "***Check In/Check Out***");
+						//check in and check out 
+						System.out.println("\r\n" + "***Restaurant Activity***");
+						//restaurant activity
+						System.out.println("\r\n" + "***Pool Activity***");
+						//pool activity
+						choice = userChoices();
+					}
+					else if (choice == 3) {
+						//staff activity report
+						System.out.println("\r\n" + "***Staff Activity Report***");
+						System.out.println("TBD..." + "\r\n");
+						choice = userChoices();
+					}
+					else if (choice == 4) {
+						//day financial report
+						System.out.println("\r\n" + "***Day " + i + " Financial Report***");
+						System.out.printf("%-30s %-10.2f %n", "Day " + i + " revenue: ", dayRevenue);
+						System.out.printf("%-30s %-10.2f %n", "Day " + i + " costs: ", dayCosts);
+						System.out.printf("%-30s %-10.2f %n", "Current Account Balance: ", currentAccountBalance);
+						System.out.println(" ");
+						choice = userChoices();
+					}
 				}
-				else if (choice == 3) {
-					//staff activity report
-					System.out.println("\r\n" + "***Staff Activity Report***");
-					System.out.println("TBD..." + "\r\n");
-					choice = userChoices();
-				}
-				else if (choice == 4) {
-					//day financial report
-					System.out.println("\r\n" + "***Day " + i + " Financial Report***");
-					System.out.printf("%-30s %-10.2f %n", "Day " + i + " revenue: ", dayRevenue);
-					System.out.printf("%-30s %-10.2f %n", "Day " + i + " costs: ", dayCosts);
-					System.out.printf("%-30s %-10.2f %n", "Current Account Balance: ", currentAccountBalance);
-					System.out.println(" ");
-					choice = userChoices();
-				}
+			
 			}
 			continue;
 		}
