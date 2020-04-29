@@ -43,8 +43,10 @@ public class FinancialAnalysis {
 		return dayCosts;
 	}
 	
-	public double calculateCurrentAccountBalance(double dayRevenue, double dayCosts) {
-		this.currentAccountBalance = this.currentAccountBalance + dayRevenue - dayCosts;
+	public double calculateCurrentAccountBalance(double dayRevenue, double dayCosts, boolean calledToday) {
+		if(calledToday == false) {
+			this.currentAccountBalance = this.currentAccountBalance + dayRevenue - dayCosts;
+		}
 		return this.currentAccountBalance;
 	}
 	

@@ -78,25 +78,34 @@ public class HotelSimulation {
 					
 			}
 			System.out.println("Day "+ i + " is over");
-			System.out.println("Type: [1] Start next day [2] Customer Activity Report [3] Staff Activity Report [4] Financial Report");
-			int choice = in.nextInt();
-			if (choice == 1) {
-				continue;
+			int choice = userChoices();
+			boolean calledToday = false;
+			while(choice != 1) {
+				if (choice == 2) {
+					//customer activity report
+					choice = userChoices();
+				}
+				else if (choice == 3) {
+					//staff activity report
+					choice = userChoices();
+				}
+				else if (choice == 4) {
+					double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
+					double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
+					double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts, calledToday);
+					calledToday = true;
+					System.out.println("\r\n" + "***Day " + i + " Financial Report***");
+					System.out.printf("%-30s %-10.2f %n", "Day " + i + " revenue: ", dayRevenue);
+					//System.out.println("Day " + i + " revenue: " + dayRevenue);
+					System.out.printf("%-30s %-10.2f %n", "Day " + i + " costs: ", dayCosts);
+					//System.out.println("Day " + i + " costs: " + dayCosts);
+					System.out.printf("%-30s %-10.2f %n", "Current Account Balance: ", currentAccountBalance);
+					System.out.println(" ");
+					//System.out.println("Current Account Balance: " + currentAccountBalance);
+					choice = userChoices();
+				}
 			}
-			else if (choice == 2) {
-				//customer activity report
-			}
-			else if (choice == 3) {
-				//staff activity report
-			}
-			else if (choice == 4) {
-				double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
-				double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
-				double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts);
-				System.out.println("Day " + i + " revenue: " + dayRevenue);
-				System.out.println("Day " + i + " costs: " + dayCosts);
-				System.out.println("Current Account Balance: " + currentAccountBalance);
-			}
+			continue;
 				//random chance for people to go to restaurant, pool
 				//staff clean rooms
 			
@@ -144,6 +153,13 @@ public class HotelSimulation {
 			randCustomerNum = random.nextInt(4) + 5;
 		}
 		return randCustomerNum;
+	}
+	
+	public static int userChoices() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Type: [1] Start next day [2] Customer Activity Report [3] Staff Activity Report [4] Day Financial Report");
+		int choice = in.nextInt();
+		return choice;
 	}
 	
 }
