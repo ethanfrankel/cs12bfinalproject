@@ -170,7 +170,7 @@ public class Hotel {
 						for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
 							this.rooms[i].occupants.get(j).setInPool(true);
 						}
-						//this.pool.addToPool(this.rooms[i].occupants);
+						this.pool.addToPool(this.rooms[i].occupants);
 					}
 				}
 			}

@@ -78,7 +78,8 @@ public class HotelSimulation {
 				
 					
 			}
-			hotel.restaurant.resetDaySales();
+			hotel.restaurant.resetDayVariables();
+			//pool reset
 			System.out.println("Day "+ i + " is over");
 			double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
 			double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
