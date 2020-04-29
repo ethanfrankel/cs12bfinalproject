@@ -1,14 +1,20 @@
 package hotel;
+
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Restaurant {
 	public ArrayList<People> occupants;
+	double daySales;
+	Random random;
 	public static final int MAXIMUM_CAPACITY = 50; 
 	//maybe some Random that determines how much money each customer is willing to spend
 	
 	
 	public Restaurant() {
 		this.occupants = new ArrayList<People>();
+		this.random = new Random();
+		this.daySales = 0;
 	}
 	
 	//adds guests already in hotel into the restaurant
@@ -29,14 +35,26 @@ public class Restaurant {
 		this.occupants.add(customer);
 	}
 	
-	//currently not working
-	public void removeFromRestaurant(Room room) {
-		Customer c = this.occupants.get(i);
-		this.occupants.remove(i);
-		System.out.println(this.occupants.get(i).name + "has left the Restaurant.");
-		return c; 
+	public void clearRestaurant() {
+		for (People person : this.occupants) {
+			if (person.type.equals("Guest")) {
+				System.out.println(person.name + " has left the Restaurant.");
+			}
+		}
+		this.occupants.clear();	
 	}
-
+	
+	public void payMeals() {
+		for (People person : this.occupants) {
+			int mealPrice = random.nextInt(31) + 15;
+			this.daySales = this.daySales + mealPrice;
+			System.out.println(person + " paid " + mealPrice + " for their meal.");
+		}
+	}
+	
+	public void resetDaySales() {
+		this.daySales = 0;
+	}
 
 	public String toString() {
 		return "Restaurant has" + " " + this.occupants.size() + " " + "occupants currently.";

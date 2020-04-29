@@ -10,6 +10,9 @@ public class Customer extends People{
 		this.name = customerName;
 	}
 	
+	public String toString() {
+		return "Customer " + this.name;
+	}
 	
 
 }

@@ -1,5 +1,6 @@
 package hotel;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
@@ -144,15 +145,10 @@ public class Hotel {
 					if (this.rooms[i].occupants.get(j).currentTimeCounter >= this.rooms[i].occupants.get(j).timeAtCheckIn + this.rooms[i].occupants.get(j).numDaysStay) {
 						this.rooms[i].checkOut();
 					}
-					if (this.rooms[i].occupants.get(j).currentTimeCounter >= this.rooms[i].occupants.get(j).timeEnterRestaurant + 0.10) {
-						this.restaurant.removeFromRestaurant(this.rooms[i]);
-					}
 				}
 			}
 		}
-		
-		//updates every customer in restaurant (since customers can only exist if in restaurant)
-		
+		this.restaurant.clearRestaurant();
 	}
 	
 	public void handleCustomers(int customerRestaurantProbability, int randCustomerNum) throws FileNotFoundException {

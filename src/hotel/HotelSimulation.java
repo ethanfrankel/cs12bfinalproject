@@ -63,7 +63,7 @@ public class HotelSimulation {
 				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
 				double numDaysCheckIn = (double) random.nextInt(3) + 1;
 				
-				
+				hotel.restaurant.payMeals();
 				hotel.updateCounters();	
 				//updateCustomerCounters
 				
@@ -77,6 +77,7 @@ public class HotelSimulation {
 				
 					
 			}
+			hotel.restaurant.resetDaySales();
 			System.out.println("Day "+ i + " is over");
 			int choice = userChoices();
 			boolean calledToday = false;

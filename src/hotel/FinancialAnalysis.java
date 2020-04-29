@@ -34,7 +34,7 @@ public class FinancialAnalysis {
 				roomEarnings = roomEarnings + rooms[i].price;//price specific to room type
 			}
 		}
-		//restaurant calcs
+		restaurantEarnings = restaurant.daySales;
 		double dayRevenue = roomEarnings + restaurantEarnings;
 		return dayRevenue;
 	}
