@@ -12,7 +12,7 @@ public class Hotel {
 	Room[] rooms;
 	Restaurant restaurant;
 	Pool pool;
-	Staff[] staff;
+	//Staff[] staff;
 	int numStaff;
 	int totalGuests;
 	int totalCustomers;
@@ -34,7 +34,7 @@ public class Hotel {
 		this.numFourGuestRoom = numFourGuestRoom;
 		this.numSuiteRoom = numSuiteRoom;
 		this.rooms = new Room[numTwoGuestRoom + numFourGuestRoom + numSuiteRoom];
-		this.staff = new Staff[this.numStaff];
+		//this.staff = new Staff[this.numStaff];
 		this.totalGuests = 0;
 		this.totalCustomers = 0;
 	}
@@ -70,7 +70,7 @@ public class Hotel {
 		System.out.println("Two Guest Rooms: " + this.numTwoGuestRoom);
 		System.out.println("Four Guest Rooms: " + this.numFourGuestRoom);
 		System.out.println("Suite Rooms: " + this.numSuiteRoom);
-		System.out.println("Staff: " + this.numStaff);
+		//System.out.println("Staff: " + this.numStaff);
 	}
 	
 	public Guest createGuest(double timeAtCheckIn, double numDaysCheckIn, String guestName) {
@@ -152,16 +152,41 @@ public class Hotel {
 	}
 	
 	public void movePeople(int guestRestaurantOdds, int customerRestaurantOdds, int guestPoolOdds, int randCustomerNum) throws FileNotFoundException {
+		//moves guests
+		for (int i = 0; i < this.rooms.length; i++) {
+			if (!this.rooms[i].available) {
+				if (this.rooms[i].guestsInRestaurant && this.rooms[i].guestsInPool) {
+					int guestRestaurantProbability = random.nextInt(10) + 1;
+					if (guestRestaurantProbability <= guestRestaurantOdds) {
+						this.rooms[i].setGuestsInRestaurant(true);
+						for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
+							this.rooms[i].occupants.get(j).setInRestaurant(true);
+						}
+						this.restaurant.addGuestToRestaurant(this.rooms[i].occupants);
+					}
+					int guestPoolProbability = random.nextInt(10) + 1;
+					if (guestPoolProbability <= guestPoolOdds) {
+						this.rooms[i].setGuestsInPool(true);
+						for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
+							this.rooms[i].occupants.get(j).setInPool(true);
+						}
+						//this.pool.addToPool(this.rooms[i].occupants);
+					}
+				}
+			}
+		}
+		
+		//moves customers
 		int customerProbability = random.nextInt(10) + 1;
 		if (customerProbability <= customerRestaurantOdds) {
 			for (int k = 0; k < randCustomerNum; k++) {
 				String customerName = this.randomName();
 				Customer customer = this.createCustomer(customerName);
-				this.restaurant.addCustomerToRestaurant(customer);
+				this.restaurant.addCustomerToRestaurant(customer, randCustomerNum);
 			}
-			System.out.println("A group of " + randCustomerNum + " customers entered the restaurant");
 		}
-		//int guest
+
+
 	}
 
 }

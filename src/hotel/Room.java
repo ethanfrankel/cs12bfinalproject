@@ -9,7 +9,8 @@ public class Room {
 	int numOfPeople;
 	boolean cleaned;
 	boolean available;
-	boolean occupied;
+	boolean guestsInRestaurant;
+	boolean guestsInPool;
 	double cleaningTime;
 	String type;
 	
@@ -17,7 +18,8 @@ public class Room {
 		this.occupants = new ArrayList<Guest>();
 		this.cleaned = true;
 		this.available = true;
-		this.occupied = false;
+		this.guestsInRestaurant = false;
+		this.guestsInPool = false;
 	}
 	
 	public void setRoomNumber(int value) {
@@ -40,12 +42,13 @@ public class Room {
 		this.available = value;
 	}
 	
-	public boolean getOccupied() {
-		return this.occupied;
+	
+	public void setGuestsInRestaurant(boolean value) {
+		this.guestsInRestaurant = value;
 	}
 	
-	public void setOccupied(boolean value) {
-		this.occupied = value;
+	public void setGuestsInPool(boolean value) {
+		this.guestsInPool = value;
 	}
 	
 	public double getPrice() {

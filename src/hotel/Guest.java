@@ -9,12 +9,15 @@ public class Guest extends People{
 	double numDaysStay;
 	double timeAtCheckIn;
 
+
 	public Guest(double timeAtCheckIn, double numDaysCheckedIn, String guestName) {
 		super();
 		this.type = "Guest";
 		this.name = guestName;
 		this.numDaysStay = numDaysCheckedIn;
 		this.timeAtCheckIn = timeAtCheckIn;
+		boolean inRestaurant = false;
+		boolean inPool = false;
 	}
 	
 	public void setTimeAtCheckIn(double value) {

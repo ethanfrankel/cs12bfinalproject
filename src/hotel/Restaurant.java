@@ -18,11 +18,11 @@ public class Restaurant {
 	}
 	
 	//adds guests already in hotel into the restaurant
-	public void addToRestaurant (ArrayList<Guest> newCustomers) {
+	public void addGuestToRestaurant (ArrayList<Guest> newCustomers) {
 		if (newCustomers.size() < (MAXIMUM_CAPACITY - this.occupants.size())) {
 			for (int i=0; i<newCustomers.size(); i++) {
 				this.occupants.add(newCustomers.get(i));
-				System.out.print(newCustomers.get(i).name + " has entered the Restaurant.");
+				System.out.print(newCustomers.get(i) + " has entered the Restaurant.");
 			}
 		}
 		else {
@@ -31,13 +31,22 @@ public class Restaurant {
 	}
 	
 	//adds customers not in hotel into the restaurant
-	public void addCustomerToRestaurant(Customer customer) {
-		this.occupants.add(customer);
+	public void addCustomerToRestaurant(Customer customer, int customerNum) {
+		if (customerNum < (MAXIMUM_CAPACITY - this.occupants.size())) {
+			for (int i = 0; i < customerNum; i++) {
+				this.occupants.add(customer);
+				System.out.println(customer + " has entered the Restaurant.");
+			}
+		}
+		else {
+			System.out.println("The restaurant does not have enough space to seat a group of " + customerNum);
+		}
 	}
 	
 	public void clearRestaurant() {
 		for (People person : this.occupants) {
 			if (person.type.equals("Guest")) {
+				person.setInRestaurant(false);
 				System.out.println(person.name + " has left the Restaurant.");
 			}
 		}
