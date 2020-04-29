@@ -140,6 +140,8 @@ public class Hotel {
 		//updates every Guest in hotel
 		for (int i = 0; i < this.rooms.length; i++) {
 			if (!this.rooms[i].available) {
+				this.rooms[i].setGuestsInRestaurant(false);
+				this.rooms[i].setGuestsInPool(false);
 				for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
 					this.rooms[i].occupants.get(j).setCurrentTimeCounter(this.rooms[i].occupants.get(j).currentTimeCounter + 0.10);
 					if (this.rooms[i].occupants.get(j).currentTimeCounter >= this.rooms[i].occupants.get(j).timeAtCheckIn + this.rooms[i].occupants.get(j).numDaysStay) {
@@ -159,10 +161,10 @@ public class Hotel {
 				if (this.rooms[i].guestsInRestaurant == false && this.rooms[i].guestsInPool == false) {
 					int guestRestaurantProbability = random.nextInt(10) + 1;
 					if (guestRestaurantProbability <= guestRestaurantOdds) {
-						this.rooms[i].setGuestsInRestaurant(true);
 						for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
 							this.rooms[i].occupants.get(j).setInRestaurant(true);
 						}
+						this.rooms[i].setGuestsInRestaurant(true);
 						this.restaurant.addGuestToRestaurant(this.rooms[i].occupants);
 					}
 				}
@@ -170,10 +172,10 @@ public class Hotel {
 				if (this.rooms[i].guestsInRestaurant == false && this.rooms[i].guestsInPool == false) {
 					int guestPoolProbability = random.nextInt(10) + 1;
 					if (guestPoolProbability <= guestPoolOdds) {
-						this.rooms[i].setGuestsInPool(true);
 						for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
 							this.rooms[i].occupants.get(j).setInPool(true);
 						}
+						this.rooms[i].setGuestsInPool(true);
 						this.pool.addToPool(this.rooms[i].occupants);
 					}
 				}

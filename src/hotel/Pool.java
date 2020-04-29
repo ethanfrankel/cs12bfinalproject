@@ -23,14 +23,14 @@ public class Pool {
 			}
 		}
 	}
+
 	
 	public void clearPool() {
-		for (Guest guest : this.occupants) {
-			guest.setInPool(false);
+		for (int i = 0; i < this.occupants.size(); i++) {
+			this.occupants.get(i).setInPool(false);
 		}
-		this.occupants.clear();	
+		this.occupants.clear();
 	}
-	
 	
 	public void resetDayVariables() {
 		this.dayGuests.clear();

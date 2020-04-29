@@ -98,13 +98,16 @@ public class HotelSimulation {
 						//customer and guest activity report
 						System.out.println("\r\n" + "***Customer and Guest Activity Report***");
 						System.out.println("\r\n" + "***Check In/Check Out***");
+						System.out.println("TBD..." + "\r\n");
 						//check in and check out 
 						System.out.println("\r\n" + "***Restaurant Activity***");
+						System.out.println("TBD..." + "\r\n");
 						//restaurant activity
-						hotel.restaurant.printRestaurantActivity();
+						//hotel.restaurant.printRestaurantActivity();
 						System.out.println("\r\n" + "***Pool Activity***");
+						System.out.println("TBD..." + "\r\n");
 						//pool activity
-						hotel.pool.printPoolActivity();
+						//hotel.pool.printPoolActivity();
 						choice = userChoices();
 					}
 					else if (choice == 3) {

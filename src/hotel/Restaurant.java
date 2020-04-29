@@ -29,6 +29,7 @@ public class Restaurant {
 			for (int i=0; i<newGuests.size(); i++) {
 				this.occupants.add(newGuests.get(i));
 				this.dayGuests.add(newGuests.get(i));
+				newGuests.get(i).setInRestaurant(true);
 			}
 		}
 	}
@@ -42,12 +43,12 @@ public class Restaurant {
 	}
 	
 	public void clearRestaurant() {
-		for (People person : this.occupants) {
-			if (person.type.equals("Guest")) {
-				person.setInRestaurant(false);
+		for (int i = 0; i < this.occupants.size(); i++) {
+			if (this.occupants.get(i).type.equals("Guest")) {
+				this.occupants.get(i).setInRestaurant(false);
 			}
 		}
-		this.occupants.clear();	
+		this.occupants.clear();
 	}
 	
 	public void payMeals() {
@@ -67,13 +68,14 @@ public class Restaurant {
 		this.daySales = 0;
 		this.dayGuests.clear();
 		this.dayCustomers.clear();
+		this.dayGuestPrices.clear();
+		this.dayCustomerPrices.clear();
 	}
 	
 	public void printRestaurantActivity() {
 		int totalServed = this.dayGuests.size() + this.dayCustomers.size();
 		System.out.println(totalServed + " people were served at the restaurant:");
-		/*
-		for (int i = 0; i < this.dayGuests.size(); i++) {
+		/*for (int i = 0; i < this.dayGuests.size(); i++) {
 			System.out.println(this.dayGuests.get(i) + " paid $" + this.dayGuestPrices.get(i) + " for their meal.");
 		}
 		for (int i = 0; i < this.dayCustomers.size(); i++) {
