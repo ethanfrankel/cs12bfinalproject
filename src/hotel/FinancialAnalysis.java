@@ -50,14 +50,12 @@ public class FinancialAnalysis {
 		return dayCosts;
 	}
 	
-	public double calculateCurrentAccountBalance(double dayRevenue, double dayCosts, boolean calledToday) {
+	public double calculateCurrentAccountBalance(double dayRevenue, double dayCosts) {
 		/**
 		 * calculates and updates the current balance 
 		 * add profit or subtract loss (if profit is negative)
 		 */
-		if(calledToday == false) {//avoid updates to balance multiple times in one day tick
-			this.currentAccountBalance = this.currentAccountBalance + dayRevenue - dayCosts;
-		}
+		this.currentAccountBalance = this.currentAccountBalance + dayRevenue - dayCosts;
 		return this.currentAccountBalance;
 	}
 

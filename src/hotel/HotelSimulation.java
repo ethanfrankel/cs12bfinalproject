@@ -80,7 +80,9 @@ public class HotelSimulation {
 			hotel.restaurant.resetDaySales();
 			System.out.println("Day "+ i + " is over");
 			int choice = userChoices();
-			boolean calledToday = false;
+			double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
+			double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
+			double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts);
 			while(choice != 1) {
 				if (choice == 2) {
 					//customer activity report
@@ -91,10 +93,6 @@ public class HotelSimulation {
 					choice = userChoices();
 				}
 				else if (choice == 4) {
-					double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
-					double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
-					double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts, calledToday);
-					calledToday = true;
 					System.out.println("\r\n" + "***Day " + i + " Financial Report***");
 					System.out.printf("%-30s %-10.2f %n", "Day " + i + " revenue: ", dayRevenue);
 					//System.out.println("Day " + i + " revenue: " + dayRevenue);
