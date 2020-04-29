@@ -12,7 +12,7 @@ public class Hotel {
 	Room[] rooms;
 	Restaurant restaurant;
 	Pool pool;
-	Staff[] staff;
+	//Staff[] staff;
 	int numStaff;
 	int totalGuests;
 	int totalCustomers;
@@ -34,7 +34,7 @@ public class Hotel {
 		this.numFourGuestRoom = numFourGuestRoom;
 		this.numSuiteRoom = numSuiteRoom;
 		this.rooms = new Room[numTwoGuestRoom + numFourGuestRoom + numSuiteRoom];
-		this.staff = new Staff[this.numStaff];
+		//this.staff = new Staff[this.numStaff];
 		this.totalGuests = 0;
 		this.totalCustomers = 0;
 	}
