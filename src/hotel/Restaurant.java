@@ -6,8 +6,10 @@ import java.util.Random;
 public class Restaurant {
 	public ArrayList<People> occupants;
 	double daySales;
-	int dayGuests;
-	int dayCustomers;
+	ArrayList<Guest> dayGuests;
+	ArrayList<Customer> dayCustomers;
+	ArrayList<Integer> dayGuestPrices;
+	ArrayList<Integer> dayCustomerPrices;
 	Random random;
 	public static final int MAXIMUM_CAPACITY = 50;
 	
@@ -15,8 +17,10 @@ public class Restaurant {
 		this.occupants = new ArrayList<People>();
 		this.random = new Random();
 		this.daySales = 0;
-		this.dayGuests = 0;
-		this.dayCustomers = 0;
+		this.dayGuests = new ArrayList<Guest>();
+		this.dayCustomers = new ArrayList<Customer>();
+		this.dayGuestPrices = new ArrayList<Integer>();
+		this.dayCustomerPrices = new ArrayList<Integer>();
 	}
 	
 	//adds guests already in hotel into the restaurant
@@ -24,26 +28,16 @@ public class Restaurant {
 		if (newGuests.size() < (MAXIMUM_CAPACITY - this.occupants.size())) {
 			for (int i=0; i<newGuests.size(); i++) {
 				this.occupants.add(newGuests.get(i));
-				this.dayGuests++;
-				System.out.print(newGuests.get(i) + " has entered the Restaurant.");
+				this.dayGuests.add(newGuests.get(i));
 			}
-		}
-		else {
-			System.out.println("The restaurant does not have enough space to seat a group of " + newGuests.size() + " people.");
 		}
 	}
 	
 	//adds customers not in hotel into the restaurant
-	public void addCustomerToRestaurant(Customer customer, int customerNum) {
-		if (customerNum < (MAXIMUM_CAPACITY - this.occupants.size())) {
-			for (int i = 0; i < customerNum; i++) {
-				this.occupants.add(customer);
-				this.dayCustomers++;
-				System.out.println(customer + " has entered the Restaurant.");
-			}
-		}
-		else {
-			System.out.println("The restaurant does not have enough space to seat a group of " + customerNum);
+	public void addCustomerToRestaurant(Customer customer) {
+		if (this.occupants.size() < MAXIMUM_CAPACITY) {
+			this.occupants.add(customer);
+			this.dayCustomers.add(customer);
 		}
 	}
 	
@@ -51,7 +45,6 @@ public class Restaurant {
 		for (People person : this.occupants) {
 			if (person.type.equals("Guest")) {
 				person.setInRestaurant(false);
-				System.out.println(person + " has left the Restaurant.");
 			}
 		}
 		this.occupants.clear();	
@@ -60,20 +53,35 @@ public class Restaurant {
 	public void payMeals() {
 		for (People person : this.occupants) {
 			int mealPrice = random.nextInt(31) + 15;
+			if (person.type.equals("Guest")) {
+				this.dayGuestPrices.add(mealPrice);
+			}
+			if (person.type.equals("Customer")) {
+				this.dayCustomerPrices.add(mealPrice);
+			}
 			this.daySales = this.daySales + mealPrice;
-			System.out.println(person + " paid " + mealPrice + " for their meal.");
 		}
 	}
 	
 	public void resetDayVariables() {
 		this.daySales = 0;
-		this.dayGuests = 0;
-		this.dayCustomers = 0;
+		this.dayGuests.clear();
+		this.dayCustomers.clear();
 	}
 	
 	public void printRestaurantActivity() {
-		System.out.println(this.dayGuests + " guests dined at the restaurant.");
-		System.out.println(this.dayCustomers + " customers that are not guests in the hotel dined at the restaurant");
-		System.out.println("Total people served: " + this.dayGuests + this.dayCustomers);
+		int totalServed = this.dayGuests.size() + this.dayCustomers.size();
+		System.out.println(totalServed + " people were served at the restaurant:");
+		/*
+		for (int i = 0; i < this.dayGuests.size(); i++) {
+			System.out.println(this.dayGuests.get(i) + " paid $" + this.dayGuestPrices.get(i) + " for their meal.");
+		}
+		for (int i = 0; i < this.dayCustomers.size(); i++) {
+			System.out.println(this.dayCustomers.get(i) + " paid $" + this.dayCustomerPrices.get(i) + " for their meal.");
+		}*/
+		System.out.println(this.dayGuests.size());
+		System.out.println(this.dayCustomers.size());
+		System.out.println(this.dayGuestPrices.size());
+		System.out.println(this.dayCustomerPrices.size());
 	}
 }

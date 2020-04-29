@@ -3,45 +3,45 @@ package hotel;
 import java.util.ArrayList;
 
 public class Pool {
-	public ArrayList<People> occupants;
-	int dayGuests;
+	public ArrayList<Guest> occupants;
+	ArrayList<Guest> dayGuests;
+	ArrayList<Double> dayGuestTime;
 	public static final int MAXIMUM_CAPACITY = 30;
 
 	public Pool() {
-		this.occupants = new ArrayList<People>();
-		this.dayGuests = 0;
+		this.occupants = new ArrayList<Guest>();
+		this.dayGuests = new ArrayList<Guest>();
+		this.dayGuestTime = new ArrayList<Double>();
 	}
 	
 	public void addToPool (ArrayList<Guest> newGuests) {
 		if (newGuests.size() < (MAXIMUM_CAPACITY - this.occupants.size())) {
 			for (int i=0; i<newGuests.size(); i++) {
 				this.occupants.add(newGuests.get(i));
-				this.dayGuests++;
-				System.out.print(newGuests.get(i) + " has entered the pool area.");
+				this.dayGuests.add(newGuests.get(i));
+				this.dayGuestTime.add(newGuests.get(i).currentTimeCounter);
 			}
-		}
-		else {
-			System.out.println("The pool does not have enough space to hold a group of " + newGuests.size() + " people.");
 		}
 	}
 	
 	public void clearPool() {
-		for (People person : this.occupants) {
-			if (person.type.equals("Guest")) {
-				person.setInPool(false);
-				System.out.println(person + " has left the pool area.");
-			}
+		for (Guest guest : this.occupants) {
+			guest.setInPool(false);
 		}
 		this.occupants.clear();	
 	}
 	
 	
 	public void resetDayVariables() {
-		this.dayGuests = 0;
+		this.dayGuests.clear();
+		this.dayGuestTime.clear();
 	}
 	
 	public void printPoolActivity() {
-		System.out.println(this.dayGuests + " used the pool today.");
+		System.out.println(this.dayGuests.size() + " used the pool today:");
+		for (int i = 0; i < this.dayGuests.size(); i++) {
+			System.out.println(this.dayGuests.get(i) + " used the pool at " + this.dayGuestTime.get(i));
+		}	
 	}
 
 }

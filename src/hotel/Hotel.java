@@ -149,13 +149,14 @@ public class Hotel {
 			}
 		}
 		this.restaurant.clearRestaurant();
+		this.pool.clearPool();
 	}
 	
 	public void movePeople(int guestRestaurantOdds, int customerRestaurantOdds, int guestPoolOdds, int randCustomerNum) throws FileNotFoundException {
 		//moves guests
 		for (int i = 0; i < this.rooms.length; i++) {
 			if (!this.rooms[i].available) {
-				if (this.rooms[i].guestsInRestaurant && this.rooms[i].guestsInPool) {
+				if (this.rooms[i].guestsInRestaurant == false && this.rooms[i].guestsInPool == false) {
 					int guestRestaurantProbability = random.nextInt(10) + 1;
 					if (guestRestaurantProbability <= guestRestaurantOdds) {
 						this.rooms[i].setGuestsInRestaurant(true);
@@ -164,6 +165,9 @@ public class Hotel {
 						}
 						this.restaurant.addGuestToRestaurant(this.rooms[i].occupants);
 					}
+				}
+					
+				if (this.rooms[i].guestsInRestaurant == false && this.rooms[i].guestsInPool == false) {
 					int guestPoolProbability = random.nextInt(10) + 1;
 					if (guestPoolProbability <= guestPoolOdds) {
 						this.rooms[i].setGuestsInPool(true);
@@ -182,7 +186,7 @@ public class Hotel {
 			for (int k = 0; k < randCustomerNum; k++) {
 				String customerName = this.randomName();
 				Customer customer = this.createCustomer(customerName);
-				this.restaurant.addCustomerToRestaurant(customer, randCustomerNum);
+				this.restaurant.addCustomerToRestaurant(customer);
 			}
 		}
 

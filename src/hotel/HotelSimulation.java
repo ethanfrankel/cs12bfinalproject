@@ -17,8 +17,8 @@ public class HotelSimulation {
 	 * @throws FileNotFoundException 
 	 */
 	
-	public static final int ODDS_GUEST_RESTAURANT = 2;
-	public static final int ODDS_CUSTOMER_RESTAURANT = 4;
+	public static final int ODDS_GUEST_RESTAURANT = 3;
+	public static final int ODDS_CUSTOMER_RESTAURANT = 2;
 	public static final int ODDS_GUEST_POOL = 2;
 	
 	public static void main(String[] args) throws FileNotFoundException {
@@ -69,17 +69,16 @@ public class HotelSimulation {
 			for (int j = 0; j < 10; j++) {
 				String dayLittleTick = i + "." + j;
 				double dayNotation = Double.parseDouble(dayLittleTick);
-				//System.out.println("Day " + dayNotation);
+				System.out.println("Day " + dayNotation);
 				int randNum = generateRandomNumber(random);
 				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
 				double numDaysCheckIn = (double) random.nextInt(3) + 1;
 				
 				hotel.restaurant.payMeals();
 				hotel.updateCounters();	
-				//updateCustomerCounters
 				
 				if (randNum > 0) {
-					//System.out.println("A group of " + randNum + " guests want to check in for " + (int) numDaysCheckIn + " days.");
+					System.out.println("A group of " + randNum + " guests want to check in for " + (int) numDaysCheckIn + " days.");
 					hotel.determineRoomType(randNum, numDaysCheckIn, dayNotation);
 				}
 				
@@ -88,8 +87,6 @@ public class HotelSimulation {
 				
 					
 			}
-			hotel.restaurant.resetDayVariables();
-			//pool reset
 			System.out.println("Day "+ i + " is over");
 			double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
 			double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
@@ -104,8 +101,10 @@ public class HotelSimulation {
 						//check in and check out 
 						System.out.println("\r\n" + "***Restaurant Activity***");
 						//restaurant activity
+						hotel.restaurant.printRestaurantActivity();
 						System.out.println("\r\n" + "***Pool Activity***");
 						//pool activity
+						hotel.pool.printPoolActivity();
 						choice = userChoices();
 					}
 					else if (choice == 3) {
@@ -126,6 +125,8 @@ public class HotelSimulation {
 				}
 			
 			}
+			hotel.restaurant.resetDayVariables();
+			hotel.pool.resetDayVariables();
 			continue;
 		}
 		System.out.println("The Simulation is Complete!");
