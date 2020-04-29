@@ -25,6 +25,17 @@ public class HotelSimulation {
 		
 		Random random = new Random();
 		
+		System.out.println("This is a simulation that tracks the activities of randomly " + "\n" +
+				"generated people in a combined hotel and restaurant."+ "\n" +
+				"There are three types of rooms. The first can hold two people ($200 per night)," + "\n" +
+				"the second can hold four people ($300 per night), and the last is a suit that" + "\n" +
+				"can hold eight people ($500 per night). There are also paid staff that make $10 per hour." + "\n" +
+				"The simulation will last for a specified number of days, and at the end" + "\n" +
+				"there will be both a general overview and a financial report of this time period." + "\n" +
+				"At the end of each day, the user will input a number 1-4 that will either" + "\n" +
+				"start the next day, access customer/guest activities, access staff activities, or" + "\n" +
+				"view the financial activty that transpired that day." + "\r\n");
+		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Number of Rooms holding up to two guests max: ");
 		int numTwoGuestRooms = in.nextInt();
@@ -48,7 +59,6 @@ public class HotelSimulation {
 			//System.out.println(hotel.rooms.get(i).detailedToString());
 		//}
 		
-		System.out.println("This is a hotel simulation that keeps track of people's activities in the hotel as well as a financial report.");
 		String startCommand = "";
 		System.out.println("Start simulation (type \"yes\"): ");
 		while (!startCommand.equals("yes")) {
@@ -121,7 +131,7 @@ public class HotelSimulation {
 		System.out.println("The Simulation is Complete!");
 		hotel.financialAnalysis.calcExplicitCosts(numStaff, numDays);
 		hotel.financialAnalysis.calcTotalRevenue(hotel.initialMoney);
-		hotel.financialAnalysis.financialOverview(hotel.numStaff, numDays, hotel.totalGuests, 100);
+		hotel.financialAnalysis.financialOverview(hotel.numStaff, numDays, hotel.totalGuests, hotel.totalCustomers);
 		
 		/*
 		for (int j = 0; j < hotel.rooms.length; j++) {
