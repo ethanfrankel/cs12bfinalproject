@@ -22,7 +22,7 @@ public class Guest extends People{
 	
 	public void setTimeAtCheckIn(double value) {
 		this.timeAtCheckIn = value;
-		this.currentTimeCounter = value;
+		//this.currentTimeCounter = value;
 	}
 	
 	public String toString() {

@@ -4,7 +4,7 @@ public class People {
 	double balance;
 	String type;
 	String name;
-	double currentTimeCounter;
+	//double currentTimeCounter;
 	double timeEnterRestaurant;
 	boolean inRestaurant;
 	boolean inPool;
@@ -13,13 +13,17 @@ public class People {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void setCurrentTimeCounter(double value) {
-		this.currentTimeCounter = value;
-	}
+	//public void setCurrentTimeCounter(double value) {
+		//this.currentTimeCounter = value;
+	//}
+	
+	//public double getCurrentTimeCounter() {
+		//return this.currentTimeCounter;
+	//}
 	
 	public void setTimeEnterRestaurant(double value) {
 		this.timeEnterRestaurant = value;
-		this.currentTimeCounter = value;
+		//this.currentTimeCounter = value;
 	}
 	
 	public void setInRestaurant(boolean value) {

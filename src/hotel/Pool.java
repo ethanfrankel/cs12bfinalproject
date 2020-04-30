@@ -14,17 +14,17 @@ public class Pool {
 		this.dayGuestTime = new ArrayList<Double>();
 	}
 	
-	public void addToPool (ArrayList<Guest> newGuests) {
+	public void addToPool (ArrayList<Guest> newGuests, double timeAdded) {
 		if (newGuests.size() < (MAXIMUM_CAPACITY - this.occupants.size())) {
 			for (int i=0; i<newGuests.size(); i++) {
 				this.occupants.add(newGuests.get(i));
 				this.dayGuests.add(newGuests.get(i));
-				this.dayGuestTime.add(newGuests.get(i).currentTimeCounter);
+				this.dayGuestTime.add(timeAdded);
+				newGuests.get(i).setInPool(true);
 			}
 		}
 	}
 
-	
 	public void clearPool() {
 		for (int i = 0; i < this.occupants.size(); i++) {
 			this.occupants.get(i).setInPool(false);
@@ -38,6 +38,7 @@ public class Pool {
 	}
 	
 	public void printPoolActivity() {
+		System.out.println("\r\n" + "***Pool Activity***");
 		System.out.println(this.dayGuests.size() + " used the pool today:");
 		for (int i = 0; i < this.dayGuests.size(); i++) {
 			System.out.println(this.dayGuests.get(i) + " used the pool at " + this.dayGuestTime.get(i));

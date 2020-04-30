@@ -69,6 +69,7 @@ public class HotelSimulation {
 			for (int j = 0; j < 10; j++) {
 				String dayLittleTick = i + "." + j;
 				double dayNotation = Double.parseDouble(dayLittleTick);
+				hotel.setCurrentTime(dayNotation);
 				System.out.println("Day " + dayNotation);
 				int randNum = generateRandomNumber(random);
 				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
@@ -79,7 +80,7 @@ public class HotelSimulation {
 				
 				if (randNum > 0) {
 					System.out.println("A group of " + randNum + " guests want to check in for " + (int) numDaysCheckIn + " days.");
-					hotel.determineRoomType(randNum, numDaysCheckIn, dayNotation);
+					hotel.determineRoomType(randNum, numDaysCheckIn);
 				}
 				
 				int randCustomerNum = generateRandomNumberCustomer(random);
@@ -100,14 +101,13 @@ public class HotelSimulation {
 						System.out.println("\r\n" + "***Check In/Check Out***");
 						System.out.println("TBD..." + "\r\n");
 						//check in and check out 
-						System.out.println("\r\n" + "***Restaurant Activity***");
-						System.out.println("TBD..." + "\r\n");
+						
+						
 						//restaurant activity
-						//hotel.restaurant.printRestaurantActivity();
-						System.out.println("\r\n" + "***Pool Activity***");
-						System.out.println("TBD..." + "\r\n");
+						hotel.restaurant.printRestaurantActivity();
+						
 						//pool activity
-						//hotel.pool.printPoolActivity();
+						hotel.pool.printPoolActivity();
 						choice = userChoices();
 					}
 					else if (choice == 3) {
