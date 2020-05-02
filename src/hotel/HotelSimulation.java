@@ -98,7 +98,9 @@ public class HotelSimulation {
 						//customer and guest activity report
 						System.out.println("\r\n" + "***Customer and Guest Activity Report***");
 						System.out.println("\r\n" + "***Check In/Check Out***");
-						System.out.println("TBD..." + "\r\n");
+						hotel.checkInCheckOut();
+						System.out.println("\r\n" + "***Rooms Status***");
+						hotel.printHotel();
 						//check in and check out 
 						
 						
@@ -127,6 +129,7 @@ public class HotelSimulation {
 				}
 			
 			}
+			hotel.clearGuestStatements();
 			hotel.restaurant.resetDayVariables();
 			hotel.pool.resetDayVariables();
 			continue;
@@ -179,10 +182,10 @@ public class HotelSimulation {
 	public static int userChoices(int currentDay, int totalDays) {
 		Scanner in = new Scanner(System.in);
 		if (currentDay == totalDays) {
-			System.out.println("\r\n" + "Type: [1] End Simulation  [2] Customer and Guest Activity Report  [3] Staff Activity Report  [4] Day Financial Report");
+			System.out.println("\r\n" + "Type: [1] End Simulation  [2] Customer and Guest Report  [3] Staff Activity Report  [4] Day Financial Report");
 		}
 		else {
-			System.out.println("\r\n" + "Type: [1] Start next day  [2] Customer and Guest Activity Report  [3] Staff Activity Report  [4] Day Financial Report");
+			System.out.println("\r\n" + "Type: [1] Start next day  [2] Customer and Guest Report  [3] Staff Activity Report  [4] Day Financial Report");
 		}
 		int choice = in.nextInt();
 		return choice;

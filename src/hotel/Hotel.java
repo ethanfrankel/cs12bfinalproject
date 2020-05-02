@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class Hotel {
 	FinancialAnalysis financialAnalysis;
@@ -20,6 +21,11 @@ public class Hotel {
 	int numFourGuestRoom;
 	int numSuiteRoom;
 	double currentTime;
+	//for option 2, checkIn/checkOut
+	ArrayList<String> guestCheckInStatementsLine1;
+	ArrayList<String> guestCheckInStatementsLine2;
+	ArrayList<String> guestCheckInStatementsLine3;
+	ArrayList<String> guestCheckOutStatements;
 	
 	public static final int NUM_NAMES = 3000;
 
@@ -37,6 +43,11 @@ public class Hotel {
 		//this.staff = new Staff[this.numStaff];
 		this.totalGuests = 0;
 		this.totalCustomers = 0;
+		this.guestCheckInStatementsLine1 = new ArrayList<String>() ;
+		this.guestCheckInStatementsLine2 = new ArrayList<String>() ;
+		this.guestCheckInStatementsLine3 = new ArrayList<String>() ;
+		this.guestCheckOutStatements = new ArrayList<String>();
+		
 	}
 
 	public void addRooms() {
@@ -76,10 +87,19 @@ public class Hotel {
 	
 	public void printHotel() {
 		//test
-		System.out.println("Two Guest Rooms: " + this.numTwoGuestRoom);
-		System.out.println("Four Guest Rooms: " + this.numFourGuestRoom);
-		System.out.println("Suite Rooms: " + this.numSuiteRoom);
+		//System.out.println("Two Guest Rooms: " + this.numTwoGuestRoom);
+		//System.out.println("Four Guest Rooms: " + this.numFourGuestRoom);
+		//System.out.println("Suite Rooms: " + this.numSuiteRoom);
 		//System.out.println("Staff: " + this.numStaff);
+		for(int i = 0; i < this.rooms.length; i++) {
+			if(this.rooms[i].available == false) {
+				System.out.println(this.rooms[i].detailedToString() + ": Occupied");
+			}
+			else {
+				System.out.println(this.rooms[i].detailedToString() + ": Available");
+			}
+			
+		}
 	}
 	
 	public Guest createGuest(double timeAtCheckIn, double numDaysCheckIn, String guestName) {
@@ -116,11 +136,17 @@ public class Hotel {
 				for (int j = 0; j < randNum; j++) {
 					//call function to generate random name
 					String guestName = this.randomName();
-					System.out.println(guestName);
+					
 					Guest guest = this.createGuest(this.currentTime, numDaysCheckIn, guestName);
 					this.rooms[i].addGuests(guest);
 				}
-				System.out.println("The " + randNum + " guests checked in " + this.rooms[i].detailedToString());
+				String occupants = "";
+				//for(int n = 0; n < this.rooms[i].occupants; n++) {
+				occupants = this.rooms[i].occupants.toString();
+				this.guestCheckInStatementsLine1.add("A group of " + randNum + " guest(s) want to check in for " + numDaysCheckIn + " days");
+				this.guestCheckInStatementsLine2.add(occupants);
+				//occupants = "";
+				this.guestCheckInStatementsLine3.add("The " + randNum + " guest(s) checked into " + this.rooms[i].detailedToString() + " at " + this.currentTime);
 				this.rooms[i].setAvailable(false);
 				this.rooms[i].setOccupied(true);
 				break;
@@ -130,11 +156,14 @@ public class Hotel {
 			}
 		}
 		if (counter == roomTypeNum) {
-			System.out.println("Room unavailable.");
+			this.guestCheckInStatementsLine3.add("Room unavailable.");
 		}
 	}
 	
 	public void determineRoomType(int randNum, double numDaysCheckIn) throws FileNotFoundException {
+		/*if(randNum > 0) {
+			this.guestCheckInStatementsLine1.add("A group of " + randNum + " guest(s) want to check in for " + numDaysCheckIn + " days");
+		}*/
 		if (0 < randNum && randNum < 3) {
 			this.checkIn(randNum, numDaysCheckIn, "Two Guest Room", this.numTwoGuestRoom);
 		}
@@ -142,18 +171,21 @@ public class Hotel {
 			this.checkIn(randNum, numDaysCheckIn, "Four Guest Room", this.numFourGuestRoom);
 		}
 		else if (4 < randNum && randNum < 9) {
-			this.checkIn(randNum, numDaysCheckIn, "Suite Room", this.numSuiteRoom);
+			this.checkIn(randNum, numDaysCheckIn, "Suite", this.numSuiteRoom);
 		}
 	}
 	
 	public void updateCounters() {
 		//updates every Guest in hotel
+		String checkOutStatement = "";
 		for (int i = 0; i < this.rooms.length; i++) {
 			if (!this.rooms[i].available) {
 				for (int j = 0; j < this.rooms[i].occupants.size(); j++) {
 					//this.rooms[i].occupants.get(j).setCurrentTimeCounter(this.currentTime);
 					if (this.currentTime >= this.rooms[i].occupants.get(j).timeAtCheckIn + this.rooms[i].occupants.get(j).numDaysStay) {
 						this.rooms[i].checkOut();
+						checkOutStatement = this.rooms[i].toString() + " has checked out.";
+						this.guestCheckOutStatements.add(checkOutStatement);
 					} //this.rooms[i].occupants.get(j).currentTimeCounter
 				}
 			}
@@ -208,8 +240,26 @@ public class Hotel {
 				this.restaurant.addCustomerToRestaurant(customer, this.currentTime);
 			}
 		}
-
-
+	}
+	
+	
+	
+	public void checkInCheckOut() {
+		for(int i = 0; i < this.guestCheckInStatementsLine1.size(); i++) {
+			System.out.println(this.guestCheckInStatementsLine1.get(i));
+			System.out.println(this.guestCheckInStatementsLine2.get(i));
+			System.out.println(this.guestCheckInStatementsLine3.get(i) + "\r\n");
+		}
+		for(int i = 0; i < this.guestCheckOutStatements.size(); i++) {
+			System.out.println(this.guestCheckOutStatements.get(i));
+		}
+	}
+	
+	public void clearGuestStatements() {
+		this.guestCheckInStatementsLine1.clear();
+		this.guestCheckInStatementsLine2.clear();
+		this.guestCheckInStatementsLine3.clear();
+		this.guestCheckOutStatements.clear();
 	}
 
 }

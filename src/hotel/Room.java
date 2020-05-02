@@ -61,8 +61,8 @@ public class Room {
 		this.occupants.clear();
 		this.numOfPeople = 0;
 		this.available = true;
-		System.out.println(this.toString() + " has checked out.");
-		//they need to pay
+		//System.out.println(this.toString() + " has checked out.");
+		
 	}
 	
 	public String toString() {
@@ -78,7 +78,7 @@ public class Room {
 	
 	public String detailedToString() {
 		//test
-		return "Room " + this.roomNumber + ": " + this.type;
+		return "Room " + this.roomNumber + " (" + this.type + ")";
 	}
 	
 	public String printGuests() {
