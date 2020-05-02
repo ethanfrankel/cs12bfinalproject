@@ -70,7 +70,7 @@ public class HotelSimulation {
 				String dayLittleTick = i + "." + j;
 				double dayNotation = Double.parseDouble(dayLittleTick);
 				hotel.setCurrentTime(dayNotation);
-				System.out.println("Day " + dayNotation);
+				//System.out.println("Day " + dayNotation);
 				int randNum = generateRandomNumber(random);
 				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
 				double numDaysCheckIn = (double) random.nextInt(3) + 1;
@@ -78,7 +78,7 @@ public class HotelSimulation {
 				hotel.updateCounters();	
 				
 				if (randNum > 0) {
-					System.out.println("A group of " + randNum + " guests want to check in for " + (int) numDaysCheckIn + " days.");
+					//System.out.println("A group of " + randNum + " guests want to check in for " + (int) numDaysCheckIn + " days.");
 					hotel.determineRoomType(randNum, numDaysCheckIn);
 				}
 				
