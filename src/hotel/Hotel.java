@@ -27,6 +27,7 @@ public class Hotel {
 	ArrayList<String> guestCheckInStatementsLine3;
 	ArrayList<String> guestCheckOutStatements;
 	
+	
 	public static final int NUM_NAMES = 3000;
 
 	public Hotel(int numTwoGuestRoom, int numFourGuestRoom, int numSuiteRoom, int numStaff) throws FileNotFoundException {
