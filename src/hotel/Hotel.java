@@ -93,10 +93,10 @@ public class Hotel {
 		//System.out.println("Staff: " + this.numStaff);
 		for(int i = 0; i < this.rooms.length; i++) {
 			if(this.rooms[i].available == false) {
-				System.out.println(this.rooms[i].detailedToString() + ": Occupied");
+				System.out.printf("%-27s %-5s %n",this.rooms[i].detailedToString(), "Occupied");
 			}
 			else {
-				System.out.println(this.rooms[i].detailedToString() + ": Available");
+				System.out.printf("%-27s %-5s %n",this.rooms[i].detailedToString(), "Available");
 			}
 			
 		}
