@@ -72,8 +72,8 @@ public class HotelSimulation {
 				hotel.setCurrentTime(dayNotation);
 				//System.out.println("Day " + dayNotation);
 				int randNum = generateRandomNumber(random);
-				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
-				double numDaysCheckIn = (double) random.nextInt(3) + 1;
+				double numDaysCheckIn = (double) random.nextInt(7) + 1;
+				//double numDaysCheckIn = (double) random.nextInt(3) + 1;
 				
 				hotel.updateCounters();	
 				
