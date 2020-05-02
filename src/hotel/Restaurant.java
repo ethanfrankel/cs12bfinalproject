@@ -29,6 +29,7 @@ public class Restaurant {
 				this.dayTotalPeople.add(newGuests.get(i));
 				this.dayTimes.add(timeAdded);
 				newGuests.get(i).setInRestaurant(true);
+				this.payMeals(newGuests.get(i));
 			}
 		}
 	}
@@ -39,6 +40,7 @@ public class Restaurant {
 			this.occupants.add(customer);
 			this.dayTotalPeople.add(customer);
 			this.dayTimes.add(timeAdded);
+			this.payMeals(customer);
 		}
 	}
 	
@@ -51,12 +53,10 @@ public class Restaurant {
 		this.occupants.clear();
 	}
 	
-	public void payMeals() {
-		for (People person : this.occupants) {
-			int mealPrice = random.nextInt(31) + 15;
-			this.dayTotalPrices.add(mealPrice);
-			this.daySales = this.daySales + mealPrice;
-		}
+	public void payMeals(People person) {
+		int mealPrice = random.nextInt(31) + 15;
+		this.dayTotalPrices.add(mealPrice);
+		this.daySales = this.daySales + mealPrice;
 	}
 	
 	public void resetDayVariables() {
@@ -68,13 +68,19 @@ public class Restaurant {
 	
 	public void printRestaurantActivity() {
 		int totalServed = this.dayTotalPeople.size();
+		int guestsServed = 0;
+		for (People person : this.dayTotalPeople) {
+			if (person.type.equals("Guest")) {
+				guestsServed++;
+			}
+		}
+		int customersServed = this.dayTotalPeople.size() - guestsServed;
 		System.out.println("\r\n" + "***Restaurant Activity***");
-		System.out.println("The restaurant made $" + this.daySales + "0 today" + "\r\n");
-		System.out.println(totalServed + " people were served:");
+		System.out.println("The restaurant made $" + this.daySales + "0 today");
+		System.out.println(totalServed + " people were served (" + guestsServed + " guests, " + customersServed + " customers):" + "\r\n");
 		for (int i = 0; i < this.dayTotalPeople.size(); i++) {
 			System.out.println(this.dayTotalPeople.get(i) + " paid $" + this.dayTotalPrices.get(i) + 
 					" for their meal at " + this.dayTimes.get(i));
 		}
-
 	}
 }

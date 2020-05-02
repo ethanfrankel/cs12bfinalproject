@@ -75,7 +75,6 @@ public class HotelSimulation {
 				//double numDaysCheckIn = (double) random.nextInt(7) + 1;
 				double numDaysCheckIn = (double) random.nextInt(3) + 1;
 				
-				hotel.restaurant.payMeals();
 				hotel.updateCounters();	
 				
 				if (randNum > 0) {
@@ -92,8 +91,8 @@ public class HotelSimulation {
 			double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
 			double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
 			double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts);
-			if(i < numDays) {
-				int choice = userChoices();
+			if(i < numDays + 1) {
+				int choice = userChoices(i, numDays);
 				while(choice != 1) {
 					if (choice == 2) {
 						//customer and guest activity report
@@ -108,13 +107,13 @@ public class HotelSimulation {
 						
 						//pool activity
 						hotel.pool.printPoolActivity();
-						choice = userChoices();
+						choice = userChoices(i, numDays);
 					}
 					else if (choice == 3) {
 						//staff activity report
 						System.out.println("\r\n" + "***Staff Activity Report***");
 						System.out.println("TBD..." + "\r\n");
-						choice = userChoices();
+						choice = userChoices(i, numDays);
 					}
 					else if (choice == 4) {
 						//day financial report
@@ -123,7 +122,7 @@ public class HotelSimulation {
 						System.out.printf("%-30s %-10.2f %n", "Day " + i + " costs: ", dayCosts);
 						System.out.printf("%-30s %-10.2f %n", "Current Account Balance: ", currentAccountBalance);
 						System.out.println(" ");
-						choice = userChoices();
+						choice = userChoices(i, numDays);
 					}
 				}
 			
@@ -177,9 +176,14 @@ public class HotelSimulation {
 		return randCustomerNum;
 	}
 	
-	public static int userChoices() {
+	public static int userChoices(int currentDay, int totalDays) {
 		Scanner in = new Scanner(System.in);
-		System.out.println("Type: [1] Start next day [2] Customer and Guest Activity Report [3] Staff Activity Report [4] Day Financial Report");
+		if (currentDay == totalDays) {
+			System.out.println("\r\n" + "Type: [1] End Simulation  [2] Customer and Guest Activity Report  [3] Staff Activity Report  [4] Day Financial Report");
+		}
+		else {
+			System.out.println("\r\n" + "Type: [1] Start next day  [2] Customer and Guest Activity Report  [3] Staff Activity Report  [4] Day Financial Report");
+		}
 		int choice = in.nextInt();
 		return choice;
 	}

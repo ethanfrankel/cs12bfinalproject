@@ -16,8 +16,8 @@ public class Guest extends People{
 		this.name = guestName;
 		this.numDaysStay = numDaysCheckedIn;
 		this.timeAtCheckIn = timeAtCheckIn;
-		boolean inRestaurant = false;
-		boolean inPool = false;
+		this.inRestaurant = false;
+		this.inPool = false;
 	}
 	
 	public void setTimeAtCheckIn(double value) {

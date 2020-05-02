@@ -1,7 +1,5 @@
 package hotel;
 
-import java.util.Random;
-
 public class Customer extends People{
 	
 	public Customer(String customerName) {

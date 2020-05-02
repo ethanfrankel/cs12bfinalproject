@@ -39,7 +39,7 @@ public class Pool {
 	
 	public void printPoolActivity() {
 		System.out.println("\r\n" + "***Pool Activity***");
-		System.out.println(this.dayGuests.size() + " used the pool today:");
+		System.out.println(this.dayGuests.size() + " used the pool today:" + "\r\n");
 		for (int i = 0; i < this.dayGuests.size(); i++) {
 			System.out.println(this.dayGuests.get(i) + " used the pool at " + this.dayGuestTime.get(i));
 		}	
