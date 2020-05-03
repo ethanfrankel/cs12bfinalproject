@@ -1,7 +1,10 @@
 package hotel;
 
+import java.util.ArrayList;
+
 public class FinancialAnalysis {
 	
+	ArrayList<Room> discountedRooms;
 	double dailyFixedHotelCosts; //per big tick
 	double totalHotelCosts;
 	double dailyFixedRestaurantCosts = 150.0; //per big tick
@@ -20,6 +23,7 @@ public class FinancialAnalysis {
 	
 	
 	public FinancialAnalysis(double initialMoney, int numRooms) {
+		this.discountedRooms = new ArrayList<Room>();
 		this.currentAccountBalance = initialMoney;//passed from hotel
 		this.dailyFixedHotelCosts = numRooms * 12;
 		this.dailyFixedHotelCosts = numRooms * 6;
@@ -35,7 +39,13 @@ public class FinancialAnalysis {
 		double restaurantEarnings = 0;
 		for (int i = 0; i < rooms.length; i++) {
 			if (!rooms[i].available) {//if room is occupied
+				if (!rooms[i].cleaned) {
+					roomEarnings = roomEarnings + (rooms[i].price * 0.85); //15% discount if room was dirty
+					this.discountedRooms.add(rooms[i]);
+				}
+				else {
 				roomEarnings = roomEarnings + rooms[i].price;//price specific to room type
+				}
 			}
 		}
 		restaurantEarnings = restaurant.daySales;
@@ -85,6 +95,19 @@ public class FinancialAnalysis {
 		 * total restaurant sales
 		 */
 		this.totalRevenue = this.currentAccountBalance - initialMoney + this.explicitCosts;
+	}
+	
+	public void resetDayVariables() {
+		this.discountedRooms.clear();
+	}
+	
+	public void printFinancialReport(int currentDay, double dayRevenue, double dayCosts, double currentAccountBalance) {
+		System.out.println("\r\n" + "***DAY " + currentDay + " FINANCIAL REPORT***" + "\r\n");
+		System.out.println("Discounted rooms: " + this.discountedRooms.toString());
+		System.out.printf("%-30s %-10.2f %n", "Day " + currentDay + " revenue: ", dayRevenue);
+		System.out.printf("%-30s %-10.2f %n", "Day " + currentDay + " costs: ", dayCosts);
+		System.out.printf("%-30s %-10.2f %n", "Current Account Balance: ", currentAccountBalance);
+		System.out.println(" ");
 	}
 
 	

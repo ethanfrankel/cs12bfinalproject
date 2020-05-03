@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Hotel {
 	FinancialAnalysis financialAnalysis;
@@ -16,6 +17,7 @@ public class Hotel {
 	int numStaff;
 	int totalGuests;
 	int totalCustomers;
+	int dayRoomsCleaned;
 	double initialMoney;
 	int numTwoGuestRoom;
 	int numFourGuestRoom;
@@ -26,6 +28,8 @@ public class Hotel {
 	ArrayList<String> guestCheckInStatementsLine2;
 	ArrayList<String> guestCheckInStatementsLine3;
 	ArrayList<String> guestCheckOutStatements;
+	//for option 3, staff report
+	ArrayList<String> staffReportStatements;
 	
 	
 	public static final int NUM_NAMES = 3000;
@@ -43,23 +47,13 @@ public class Hotel {
 		this.staff = new Staff[numStaff];
 		this.totalGuests = 0;
 		this.totalCustomers = 0;
+		this.dayRoomsCleaned = 0;
 		this.guestCheckInStatementsLine1 = new ArrayList<String>() ;
 		this.guestCheckInStatementsLine2 = new ArrayList<String>() ;
 		this.guestCheckInStatementsLine3 = new ArrayList<String>() ;
 		this.guestCheckOutStatements = new ArrayList<String>();
+		this.staffReportStatements = new ArrayList<String>();
 		this.financialAnalysis = new FinancialAnalysis(this.initialMoney, this.rooms.length);
-	}
-
-	public void addRooms() {
-		for(int i=0; i<this.numTwoGuestRoom; i++) {
-		      this.rooms[i] = new TwoGuestRoom();
-		}
-		for(int i=this.numTwoGuestRoom; i<this.numFourGuestRoom + this.numTwoGuestRoom; i++) {
-		      this.rooms[i] = new FourGuestRoom();
-		}
-		for(int i=this.numTwoGuestRoom + this.numFourGuestRoom; i<this.rooms.length; i++) {
-		      this.rooms[i] = new SuiteRoom();
-		}
 	}
 	
 	public void setRoomNumbers() {
@@ -91,6 +85,17 @@ public class Hotel {
 		this.initialMoney = value;
 	}
 	
+	public void addRooms() {
+		for(int i=0; i<this.numTwoGuestRoom; i++) {
+		      this.rooms[i] = new TwoGuestRoom();
+		}
+		for(int i=this.numTwoGuestRoom; i<this.numFourGuestRoom + this.numTwoGuestRoom; i++) {
+		      this.rooms[i] = new FourGuestRoom();
+		}
+		for(int i=this.numTwoGuestRoom + this.numFourGuestRoom; i<this.rooms.length; i++) {
+		      this.rooms[i] = new SuiteRoom();
+		}
+	}
 	
 	public void printHotel() {
 		//test
@@ -139,7 +144,7 @@ public class Hotel {
 	public void checkIn(int randNum, double numDaysCheckIn, String roomType, int roomTypeNum) throws FileNotFoundException {
 		int counter = 0;
 		for (int i = 0; i < this.rooms.length; i++ ) {
-			if (this.rooms[i].type == roomType && this.rooms[i].available) {
+			if (this.rooms[i].type == roomType && this.rooms[i].available && this.rooms[i].cleaned) {
 				for (int j = 0; j < randNum; j++) {
 					//call function to generate random name
 					String guestName = this.randomName();
@@ -158,7 +163,7 @@ public class Hotel {
 				this.rooms[i].setOccupied(true);
 				break;
 			}
-			else if (this.rooms[i].type == roomType && !this.rooms[i].available) {
+			else if (this.rooms[i].type == roomType && !this.rooms[i].available || !this.rooms[i].cleaned) {
 				counter++;
 			}
 		}
@@ -262,6 +267,13 @@ public class Hotel {
 		}
 	}
 	
+	public void printStaffReport() {
+		System.out.println("\r\n" + "***STAFF ACTIVITY REPORT***");
+		for (int i = 0; i < this.staffReportStatements.size(); i++) {
+			System.out.println(this.staffReportStatements.get(i));
+		}
+	}
+	
 	public void cleanRooms() {
 		ArrayList<Room> roomsToClean = new ArrayList<Room>();
 		for (int i = 0; i < this.rooms.length; i++) {
@@ -269,26 +281,46 @@ public class Hotel {
 				roomsToClean.add(this.rooms[i]);
 			}
 		}
-		int roomsToCleanCounter = 0;
-		while (roomsToCleanCounter != roomsToClean.size()) {
-			for (int i = 0; i < this.staff.length; i++) {
-				if (this.staff[i].currentlyCleaning == false) {
-					int roomIndex = random.nextInt(roomsToClean.size() + 1);
-					roomsToClean.get(roomIndex).addStaffCleaning(this.staff[i]);
-					roomsToClean.get(roomIndex).beingCleaned = true;
-					this.staff[i].setTimeStartedCleaning(this.currentTime);
-					roomsToCleanCounter++;
-					System.out.println("(" + this.currentTime + ")" + this.staff[i] + " started cleaning " + roomsToClean.get(roomIndex));
-				}
+		
+		ArrayList<Staff> staffReady = new ArrayList<Staff>();
+		for (Staff staff : this.staff) {
+			if (staff.currentlyCleaning == false) {
+				staffReady.add(staff);
 			}
 		}
+		Collections.shuffle(roomsToClean);
+		Collections.shuffle(staffReady);
+		if (roomsToClean.size() > staffReady.size()) {
+			int difference = roomsToClean.size() - staffReady.size();
+			for (int i = 0; i < roomsToClean.size() - difference; i++) {
+				roomsToClean.get(i).addStaffCleaning(staffReady.get(i));
+				roomsToClean.get(i).beingCleaned = true;
+				staffReady.get(i).setTimeStartedCleaning(this.currentTime);
+				staffReady.get(i).setCurrentlyCleaning(true);
+				this.staffReportStatements.add(staffReady.get(i) + " started cleaning " + roomsToClean.get(i) + " at " + this.currentTime);
+				this.dayRoomsCleaned++;
+			}
+		}
+		
+		else {
+			for (int i = 0; i < roomsToClean.size(); i++) {
+				roomsToClean.get(i).addStaffCleaning(staffReady.get(i));
+				roomsToClean.get(i).beingCleaned = true;
+				staffReady.get(i).setTimeStartedCleaning(this.currentTime);
+				staffReady.get(i).setCurrentlyCleaning(true);
+				this.staffReportStatements.add(staffReady.get(i) + " started cleaning " + roomsToClean.get(i) + " at " + this.currentTime);
+				this.dayRoomsCleaned++;
+			}
+		}
+		
 		for (int i = 0; i < this.rooms.length; i++) {
 			if (this.rooms[i].beingCleaned) {
 				if (this.currentTime >= this.rooms[i].staffCleaning.get(0).timeStartedCleaning + this.rooms[i].cleaningTime) {
-					this.rooms[i].removeStaffCleaning();
 					this.rooms[i].setCleaned(true);
 					this.rooms[i].beingCleaned = false;
-					System.out.println("(" + this.currentTime + ")" + this.staff[i] + " finished cleaning " + this.rooms[i]);
+					this.rooms[i].staffCleaning.get(0).setCurrentlyCleaning(false);
+					this.staffReportStatements.add(this.rooms[i].staffCleaning.get(0) + " finished cleaning " + this.rooms[i] + " at " + this.currentTime);
+					this.rooms[i].removeStaffCleaning();
 				}
 			}
 		}
@@ -302,7 +334,9 @@ public class Hotel {
 		}
 	}
 	
-	public void clearGuestStatements() {
+	public void resetDayVariables() {
+		this.dayRoomsCleaned = 0;
+		this.staffReportStatements.clear();
 		this.guestCheckInStatementsLine1.clear();
 		this.guestCheckInStatementsLine2.clear();
 		this.guestCheckInStatementsLine3.clear();

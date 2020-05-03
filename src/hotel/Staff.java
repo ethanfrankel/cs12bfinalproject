@@ -22,7 +22,7 @@ public class Staff {
 	}
 	
 	public String toString() {
-		return "Staff " + this.staffNumber;
+		return "Staff Member #" + this.staffNumber;
 	}
 
 }

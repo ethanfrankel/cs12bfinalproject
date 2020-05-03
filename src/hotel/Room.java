@@ -17,6 +17,7 @@ public class Room {
 
 	protected Room() {
 		this.occupants = new ArrayList<Guest>();
+		this.staffCleaning = new ArrayList<Staff>();
 		this.cleaned = true;
 		this.available = true;
 		this.occupied = false;

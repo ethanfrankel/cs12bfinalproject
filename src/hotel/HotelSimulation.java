@@ -86,7 +86,7 @@ public class HotelSimulation {
 				
 				int randCustomerNum = generateRandomNumberCustomer(random);
 				hotel.movePeople(ODDS_GUEST_RESTAURANT, ODDS_CUSTOMER_RESTAURANT, ODDS_GUEST_POOL, randCustomerNum);
-				
+				hotel.cleanRooms();
 					
 			}
 			
@@ -100,7 +100,7 @@ public class HotelSimulation {
 				while(choice != 1) {
 					if (choice == 2) {
 						//customer and guest activity report
-						System.out.println("\r\n" + "***Customer and Guest Activity Report***");
+						System.out.println("\r\n" + "***CUSTOMER AND GUEST REPORT***");
 						System.out.println("\r\n" + "***Check In/Check Out***");
 						hotel.checkInCheckOut();
 						System.out.println("\r\n" + "***Rooms Status***");
@@ -117,26 +117,22 @@ public class HotelSimulation {
 					}
 					else if (choice == 3) {
 						//staff activity report
-						System.out.println("\r\n" + "***Staff Activity Report***");
-						System.out.println("TBD..." + "\r\n");
+						hotel.printStaffReport();
 						choice = userChoices(i, numDays);
 					}
 					else if (choice == 4) {
 						//day financial report
-						System.out.println("\r\n" + "***Day " + i + " Financial Report***");
-						System.out.printf("%-30s %-10.2f %n", "Day " + i + " revenue: ", dayRevenue);
-						System.out.printf("%-30s %-10.2f %n", "Day " + i + " costs: ", dayCosts);
-						System.out.printf("%-30s %-10.2f %n", "Current Account Balance: ", currentAccountBalance);
-						System.out.println(" ");
+						hotel.financialAnalysis.printFinancialReport(i, dayRevenue, dayCosts, currentAccountBalance);
 						choice = userChoices(i, numDays);
 					}
 				}
 			
 			}
-			hotel.clearGuestStatements();
+		
+			hotel.resetDayVariables();
+			hotel.financialAnalysis.resetDayVariables();
 			hotel.restaurant.resetDayVariables();
 			hotel.pool.resetDayVariables();
-			//hotel.cleanRooms();
 			continue;
 		}
 		System.out.println("The Simulation is Complete!");
