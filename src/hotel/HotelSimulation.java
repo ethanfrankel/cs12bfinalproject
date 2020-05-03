@@ -28,8 +28,8 @@ public class HotelSimulation {
 		System.out.println("This is a simulation that tracks the activities of randomly " + "\n" +
 				"generated people in a combined hotel and restaurant."+ "\n" +
 				"There are three types of rooms. The first can hold two people ($200 per night)," + "\n" +
-				"the second can hold four people ($300 per night), and the last is a suit that" + "\n" +
-				"can hold eight people ($500 per night). There are also paid staff that make $10 per hour." + "\n" +
+				"the second can hold four people ($300 per night), and the last is a suite that" + "\n" +
+				"can hold eight people ($500 per night). There are also paid staff that make $15 per hour." + "\n" +
 				"The simulation will last for a specified number of days, and at the end" + "\n" +
 				"there will be both a general overview and a financial report of this time period." + "\n" +
 				"At the end of each day, the user will input a number 1-4 that will either" + "\n" +
