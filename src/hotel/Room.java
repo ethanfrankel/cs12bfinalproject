@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Room {
 	ArrayList<Guest> occupants;
-	int roomNumber;
-	double price;
-	int numOfPeople;
-	boolean cleaned;
-	boolean available;
-	boolean occupied;
-	double cleaningTime;
-	String type;
+	int roomNumber;//room number
+	double price;//price of each room: $200, $300, $500
+	int numOfPeople;//number of people in the room
+	boolean cleaned;//for staff use
+	boolean available;//people are checked into room
+	boolean occupied;//people are currently in the room
+	double cleaningTime;//number of small/hour ticks each room takes to clean
+	String type;//twoGuestRoom, fourGuestRoom, or suitRoom
 	
 	protected Room() {
 		this.occupants = new ArrayList<Guest>();
@@ -53,11 +53,19 @@ public class Room {
 	}
 	
 	public void addGuests(Guest guest) {
+		/**
+		 * adds guests to ArrayList occupants
+		 * updates counter
+		 */
 		this.occupants.add(guest);
 		this.numOfPeople++;
 	}
 	
 	public void checkOut() {
+		/**
+		 * function to clear ArrayList occupants and reset counter
+		 * rooms are set to available
+		 */
 		this.occupants.clear();
 		this.numOfPeople = 0;
 		this.available = true;
@@ -66,10 +74,16 @@ public class Room {
 	}
 	
 	public String toString() {
+		/**
+		 * simple toString for room
+		 */
 		return "Room " + this.roomNumber;
 	}
 	
 	public String toStringRoomOccupancy() {
+		/**
+		 * toString for each room and its occupancy
+		 */
 		if (this.numOfPeople == 0) {
 			return "Room " + this.roomNumber + ": Vacant";
 		}
@@ -77,11 +91,16 @@ public class Room {
 	}
 	
 	public String detailedToString() {
-		//test
+		/*
+		 * toString with type of room 
+		 */
 		return "Room " + this.roomNumber + " (" + this.type + ")";
 	}
 	
 	public String printGuests() {
+		/**
+		 * prints guests in rooms
+		 */
 	    String values = "Guests: ";
 	    for (int i = 0; i < this.occupants.size(); i++) {
 	      //this if statement essentially does not print a comma after the last item in list
