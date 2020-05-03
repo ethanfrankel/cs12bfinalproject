@@ -132,6 +132,7 @@ public class HotelSimulation {
 			hotel.clearGuestStatements();
 			hotel.restaurant.resetDayVariables();
 			hotel.pool.resetDayVariables();
+			//clean rooms
 			continue;
 		}
 		System.out.println("The Simulation is Complete!");

@@ -255,6 +255,13 @@ public class Hotel {
 		}
 	}
 	
+	public void cleanRooms() {
+		for (int i = 0; i < this.numStaff; i++) {
+			int roomIndex = random.nextInt(this.rooms.length + 1);
+			
+		}
+	}
+	
 	public void clearGuestStatements() {
 		this.guestCheckInStatementsLine1.clear();
 		this.guestCheckInStatementsLine2.clear();
