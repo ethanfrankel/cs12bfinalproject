@@ -2,10 +2,12 @@ package hotel;
 
 public class FinancialAnalysis {
 	
-	double dailyFixedHotelCosts = 300.0; //per big tick
+	double dailyFixedHotelCosts; //per big tick
 	double totalHotelCosts;
 	double dailyFixedRestaurantCosts = 150.0; //per big tick
 	double totalRestaurantCosts;
+	double dailyFixedPoolCosts = 50;
+	double totalPoolCosts;
 	double staffSalary = 100.0; //per big tick per staff member
 	double totalStaffComp; //Comp = compensation
 	double explicitCosts;//All costs
@@ -17,8 +19,10 @@ public class FinancialAnalysis {
 	double currentAccountBalance; //Updated at the end of each day
 	
 	
-	public FinancialAnalysis(double initialMoney) {
+	public FinancialAnalysis(double initialMoney, int numRooms) {
 		this.currentAccountBalance = initialMoney;//passed from hotel
+		this.dailyFixedHotelCosts = numRooms * 12;
+		this.dailyFixedHotelCosts = numRooms * 6;
 	}
 	
 	public double dayRevenue(Room[] rooms, Restaurant restaurant) { //add restaurant calcs
@@ -44,9 +48,10 @@ public class FinancialAnalysis {
 		 * Calculates the day's costs
 		 * fixed hotel costs
 		 * fixed restaurant costs
+		 * fixed pool costs
 		 * staff compensation
 		 */
-		double dayCosts = this.dailyFixedHotelCosts + this.dailyFixedRestaurantCosts + (this.staffSalary * numStaff);
+		double dayCosts = this.dailyFixedHotelCosts + this.dailyFixedRestaurantCosts + this.dailyFixedPoolCosts + (this.staffSalary * numStaff);
 		return dayCosts;
 	}
 	
@@ -68,7 +73,8 @@ public class FinancialAnalysis {
 		this.totalStaffComp = this.staffSalary * numStaff * numDays;
 		this.totalHotelCosts = this.dailyFixedHotelCosts * numDays;
 		this.totalRestaurantCosts = this.dailyFixedRestaurantCosts * numDays;
-		this.explicitCosts = this.totalHotelCosts + this.totalRestaurantCosts + this.totalStaffComp;
+		this.totalPoolCosts = this.dailyFixedPoolCosts * numDays;
+		this.explicitCosts = this.totalHotelCosts + this.totalRestaurantCosts + this.totalPoolCosts + this.totalStaffComp;
 	}
 	
 	
@@ -82,7 +88,7 @@ public class FinancialAnalysis {
 	}
 
 	
-	public void financialOverview(int numStaff, int numDays, int totalGuests, int totalCustomers) {
+	public void financialOverview(int numStaff, int numDays, int totalGuests, int totalServed) {
 		/**
 		 * calculates profit
 		 * prints hotel overview nicely
@@ -91,7 +97,7 @@ public class FinancialAnalysis {
 		this.profit = this.totalRevenue - this.explicitCosts;
 		System.out.println("\r\n " + "***Overview of Hotel Opporations***");
 		System.out.println("Total Hotel Guests: " + totalGuests);
-		System.out.println("Total Restaurant Customers: " + totalCustomers);
+		System.out.println("Total People Served at Restaurant: " + totalServed);
 		System.out.println("Total Paid Staff: " + numStaff);
 		System.out.println("Length of Simulation: " + numDays + " day(s)");
 		System.out.println("\r\n " + "***Financial Overview***");

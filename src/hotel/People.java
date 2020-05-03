@@ -13,14 +13,6 @@ public class People {
 		// TODO Auto-generated constructor stub
 	}
 	
-	//public void setCurrentTimeCounter(double value) {
-		//this.currentTimeCounter = value;
-	//}
-	
-	//public double getCurrentTimeCounter() {
-		//return this.currentTimeCounter;
-	//}
-	
 	public void setTimeEnterRestaurant(double value) {
 		this.timeEnterRestaurant = value;
 		//this.currentTimeCounter = value;

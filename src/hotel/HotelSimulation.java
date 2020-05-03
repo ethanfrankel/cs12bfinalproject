@@ -137,7 +137,7 @@ public class HotelSimulation {
 		System.out.println("The Simulation is Complete!");
 		hotel.financialAnalysis.calcExplicitCosts(numStaff, numDays);
 		hotel.financialAnalysis.calcTotalRevenue(hotel.initialMoney);
-		hotel.financialAnalysis.financialOverview(hotel.numStaff, numDays, hotel.totalGuests, hotel.totalCustomers);
+		hotel.financialAnalysis.financialOverview(hotel.numStaff, numDays, hotel.totalGuests, hotel.restaurant.totalServed);
 		
 		/*
 		for (int j = 0; j < hotel.rooms.length; j++) {

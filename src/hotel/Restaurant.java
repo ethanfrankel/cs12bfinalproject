@@ -10,6 +10,7 @@ public class Restaurant {
 	ArrayList<Integer> dayTotalPrices;
 	ArrayList<Double> dayTimes;
 	Random random;
+	int totalServed;
 	public static final int MAXIMUM_CAPACITY = 50;
 	
 	public Restaurant() {
@@ -19,6 +20,7 @@ public class Restaurant {
 		this.dayTotalPeople = new ArrayList<People>();
 		this.dayTotalPrices = new ArrayList<Integer>();
 		this.dayTimes = new ArrayList<Double>();
+		this.totalServed = 0;
 	}
 	
 	//adds guests already in hotel into the restaurant
@@ -60,6 +62,7 @@ public class Restaurant {
 	}
 	
 	public void resetDayVariables() {
+		this.totalServed = this.totalServed + this.dayTotalPeople.size();
 		this.daySales = 0;
 		this.dayTotalPeople.clear();
 		this.dayTotalPrices.clear();

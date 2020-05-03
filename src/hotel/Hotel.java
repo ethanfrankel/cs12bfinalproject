@@ -32,7 +32,6 @@ public class Hotel {
 
 	public Hotel(int numTwoGuestRoom, int numFourGuestRoom, int numSuiteRoom, int numStaff) throws FileNotFoundException {
 		this.initialMoney = 10000;
-		this.financialAnalysis = new FinancialAnalysis(this.initialMoney);
 		this.random = new Random();
 		this.restaurant = new Restaurant();
 		this.pool = new Pool();
@@ -48,7 +47,7 @@ public class Hotel {
 		this.guestCheckInStatementsLine2 = new ArrayList<String>() ;
 		this.guestCheckInStatementsLine3 = new ArrayList<String>() ;
 		this.guestCheckOutStatements = new ArrayList<String>();
-		
+		this.financialAnalysis = new FinancialAnalysis(this.initialMoney, this.rooms.length);
 	}
 
 	public void addRooms() {
@@ -111,7 +110,7 @@ public class Hotel {
 	
 	public Customer createCustomer(String guestName) {
 		Customer customer = new Customer(guestName);
-		this.totalCustomers++;
+		//this.totalCustomers++;
 		return customer;
 	}
 	
