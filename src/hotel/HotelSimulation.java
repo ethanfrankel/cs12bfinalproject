@@ -9,11 +9,11 @@ import java.io.FileNotFoundException;
 public class HotelSimulation {
 	/**
 	 *two tick system
-	 *day and time/hour
+	 *day and time
 	 *
 	 *input number of days for simulation as parameter
 	 *
-	 *1 = next day, 2 = customer and guest report, 3 = staff activity report, 4 = sales report
+	 *1 = next day, 2 = staff activity report, 3 = customer activity report, 4 = sales report
 	 * @throws FileNotFoundException 
 	 */
 	
@@ -94,10 +94,7 @@ public class HotelSimulation {
 			double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
 			double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
 			double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts);
-			hotel.clearGuestStatements();
-			hotel.restaurant.resetDayVariables();
-			hotel.pool.resetDayVariables();
-			hotel.cleanRooms();
+			
 			if(i < numDays + 1) {
 				int choice = userChoices(i, numDays);
 				while(choice != 1) {
@@ -136,6 +133,10 @@ public class HotelSimulation {
 				}
 			
 			}
+			hotel.clearGuestStatements();
+			hotel.restaurant.resetDayVariables();
+			hotel.pool.resetDayVariables();
+			//hotel.cleanRooms();
 			continue;
 		}
 		System.out.println("The Simulation is Complete!");
