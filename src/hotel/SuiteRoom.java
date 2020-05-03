@@ -1,9 +1,6 @@
 package hotel;
 
 public class SuiteRoom extends Room {
-	/**
-	 * $500 per night
-	 */
 
 	public SuiteRoom() {
 		super();

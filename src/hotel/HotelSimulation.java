@@ -9,11 +9,11 @@ import java.io.FileNotFoundException;
 public class HotelSimulation {
 	/**
 	 *two tick system
-	 *day and time
+	 *day and time/hour
 	 *
 	 *input number of days for simulation as parameter
 	 *
-	 *1 = next day, 2 = staff activity report, 3 = customer activity report, 4 = sales report
+	 *1 = next day, 2 = customer and guest report, 3 = staff activity report, 4 = sales report
 	 * @throws FileNotFoundException 
 	 */
 	
