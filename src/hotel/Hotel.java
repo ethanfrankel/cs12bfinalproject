@@ -33,9 +33,9 @@ public class Hotel {
 	public Hotel(int numTwoGuestRoom, int numFourGuestRoom, int numSuiteRoom, int numStaff) throws FileNotFoundException {
 		this.initialMoney = 10000;
 		this.random = new Random();
-		this.restaurant = new Restaurant();
 		this.pool = new Pool();
 		this.numStaff = numStaff;
+		this.restaurant = new Restaurant(numStaff);
 		this.numTwoGuestRoom = numTwoGuestRoom;
 		this.numFourGuestRoom = numFourGuestRoom;
 		this.numSuiteRoom = numSuiteRoom;

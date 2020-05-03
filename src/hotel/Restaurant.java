@@ -11,9 +11,9 @@ public class Restaurant {
 	ArrayList<Double> dayTimes;
 	Random random;
 	int totalServed;
-	public static final int MAXIMUM_CAPACITY = 50;
+	int maxCapacity;
 	
-	public Restaurant() {
+	public Restaurant(int numStaff) {
 		this.occupants = new ArrayList<People>();
 		this.random = new Random();
 		this.daySales = 0;
@@ -21,11 +21,12 @@ public class Restaurant {
 		this.dayTotalPrices = new ArrayList<Integer>();
 		this.dayTimes = new ArrayList<Double>();
 		this.totalServed = 0;
+		this.maxCapacity = numStaff * 2;
 	}
 	
 	//adds guests already in hotel into the restaurant
 	public void addGuestToRestaurant (ArrayList<Guest> newGuests, double timeAdded) {
-		if (newGuests.size() < (MAXIMUM_CAPACITY - this.occupants.size())) {
+		if (newGuests.size() < (this.maxCapacity - this.occupants.size())) {
 			for (int i=0; i<newGuests.size(); i++) {
 				this.occupants.add(newGuests.get(i));
 				this.dayTotalPeople.add(newGuests.get(i));
@@ -38,7 +39,7 @@ public class Restaurant {
 	
 	//adds customers not in hotel into the restaurant
 	public void addCustomerToRestaurant(Customer customer, double timeAdded) {
-		if (this.occupants.size() < MAXIMUM_CAPACITY) {
+		if (this.occupants.size() < this.maxCapacity) {
 			this.occupants.add(customer);
 			this.dayTotalPeople.add(customer);
 			this.dayTimes.add(timeAdded);
