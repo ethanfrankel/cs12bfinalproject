@@ -7,11 +7,11 @@ public class FinancialAnalysis {
 	ArrayList<Room> discountedRooms;
 	double dailyFixedHotelCosts; //per big tick
 	double totalHotelCosts;
-	double dailyFixedRestaurantCosts = 150.0; //per big tick
+	double dailyFixedRestaurantCosts; //per big tick
 	double totalRestaurantCosts;
 	double dailyFixedPoolCosts = 50;
 	double totalPoolCosts;
-	double staffSalary = 100.0; //per big tick per staff member
+	double staffSalary = 150.0; //per big tick per staff member
 	double totalStaffComp; //Comp = compensation
 	double explicitCosts;//All costs
 	double hotelRevenue;
@@ -26,7 +26,7 @@ public class FinancialAnalysis {
 		this.discountedRooms = new ArrayList<Room>();
 		this.currentAccountBalance = initialMoney;//passed from hotel
 		this.dailyFixedHotelCosts = numRooms * 12;
-		this.dailyFixedHotelCosts = numRooms * 6;
+		this.dailyFixedRestaurantCosts = numRooms * 10;
 	}
 	
 	public double dayRevenue(Room[] rooms, Restaurant restaurant) { //add restaurant calcs

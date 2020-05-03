@@ -80,6 +80,7 @@ public class Room {
 		this.occupants.clear();
 		this.numOfPeople = 0;
 		this.available = true;
+		this.occupied = false;
 		//System.out.println(this.toString() + " has checked out.");
 
 	}
