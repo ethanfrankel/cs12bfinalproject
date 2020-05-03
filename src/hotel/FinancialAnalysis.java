@@ -25,8 +25,8 @@ public class FinancialAnalysis {
 	public FinancialAnalysis(double initialMoney, int numRooms) {
 		this.discountedRooms = new ArrayList<Room>();
 		this.currentAccountBalance = initialMoney;//passed from hotel
-		this.dailyFixedHotelCosts = numRooms * 12;
-		this.dailyFixedRestaurantCosts = numRooms * 10;
+		this.dailyFixedHotelCosts = numRooms * 14;
+		this.dailyFixedRestaurantCosts = numRooms * 8;
 	}
 	
 	public double dayRevenue(Room[] rooms, Restaurant restaurant) { //add restaurant calcs
