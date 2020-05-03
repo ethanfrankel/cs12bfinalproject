@@ -40,7 +40,7 @@ public class FinancialAnalysis {
 		for (int i = 0; i < rooms.length; i++) {
 			if (!rooms[i].available) {//if room is occupied
 				if (!rooms[i].cleaned) {
-					roomEarnings = roomEarnings + (rooms[i].price * 0.85); //15% discount if room was dirty
+					roomEarnings = roomEarnings + (rooms[i].price * 0.75); //25% discount if room was dirty
 					this.discountedRooms.add(rooms[i]);
 				}
 				else {
@@ -127,7 +127,8 @@ public class FinancialAnalysis {
 		System.out.printf("%-30s %-10.2f %n", "Total Revenue: ", this.totalRevenue);
 		System.out.printf("%-30s %-10.2f %n", "Total (explicit) Costs: ", this.explicitCosts);
 		System.out.printf("%-30s %-10.2f %n", "Total Profit: ", this.profit);
-		System.out.println("\r\n" + "Current Account Balance of the Hotel: " + this.currentAccountBalance);
+		System.out.println("");
+		System.out.printf("%-30s %-10.2f %n", "Final Account Balance: ", this.currentAccountBalance);
 		
 		
 	}
