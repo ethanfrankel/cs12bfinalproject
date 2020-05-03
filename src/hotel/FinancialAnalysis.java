@@ -24,27 +24,29 @@ public class FinancialAnalysis {
 	
 	public FinancialAnalysis(double initialMoney, int numRooms) {
 		this.discountedRooms = new ArrayList<Room>();
-		this.currentAccountBalance = initialMoney;//passed from hotel
+		this.currentAccountBalance = initialMoney; //passed from hotel
+		//costs of hotel and restaurant are based on the number of rooms
 		this.dailyFixedHotelCosts = numRooms * 14;
 		this.dailyFixedRestaurantCosts = numRooms * 8;
 	}
 	
-	public double dayRevenue(Room[] rooms, Restaurant restaurant) { //add restaurant calcs
+	public double dayRevenue(Room[] rooms, Restaurant restaurant) {
 		/**
 		 * Calculates the day's revenue
 		 * hotel room sales
+		 * 
 		 * restaurant sales
 		 */
 		double roomEarnings = 0;
 		double restaurantEarnings = 0;
 		for (int i = 0; i < rooms.length; i++) {
-			if (!rooms[i].available) {//if room is occupied
+			if (!rooms[i].available) { //if room is occupied
 				if (!rooms[i].cleaned) {
-					roomEarnings = roomEarnings + (rooms[i].price * 0.85); //15% discount if room was dirty
+					roomEarnings = roomEarnings + (rooms[i].price * 0.75); //25% discount if room was dirty
 					this.discountedRooms.add(rooms[i]);
 				}
 				else {
-				roomEarnings = roomEarnings + rooms[i].price;//price specific to room type
+				roomEarnings = roomEarnings + rooms[i].price; //price specific to room type
 				}
 			}
 		}
@@ -98,10 +100,17 @@ public class FinancialAnalysis {
 	}
 	
 	public void resetDayVariables() {
+		/**
+		 * clear discountedRooms, which changes every day
+		 */
 		this.discountedRooms.clear();
 	}
 	
 	public void printFinancialReport(int currentDay, double dayRevenue, double dayCosts, double currentAccountBalance) {
+		/**
+		 * prints financial report when called
+		 * prints day's financial activity: revenue, costs, current account balance
+		 */
 		System.out.println("\r\n" + "***DAY " + currentDay + " FINANCIAL REPORT***" + "\r\n");
 		System.out.println("Discounted rooms: " + this.discountedRooms.toString());
 		System.out.printf("%-30s %-10.2f %n", "Day " + currentDay + " revenue: ", dayRevenue);
@@ -127,7 +136,8 @@ public class FinancialAnalysis {
 		System.out.printf("%-30s %-10.2f %n", "Total Revenue: ", this.totalRevenue);
 		System.out.printf("%-30s %-10.2f %n", "Total (explicit) Costs: ", this.explicitCosts);
 		System.out.printf("%-30s %-10.2f %n", "Total Profit: ", this.profit);
-		System.out.println("\r\n" + "Current Account Balance of the Hotel: " + this.currentAccountBalance);
+		System.out.println("");
+		System.out.printf("%-30s %-10.2f %n", "Final Account Balance: ", this.currentAccountBalance);
 		
 		
 	}

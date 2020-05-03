@@ -3,13 +3,16 @@ package hotel;
 import java.util.ArrayList;
 
 public class Room {
+	/**
+	 * Rooms can be Two Guest Rooms, Four Guest Rooms, or Suite Rooms (subclasses of Room)
+	 */
 	ArrayList<Guest> occupants;
 	int roomNumber;
 	double price;
 	int numOfPeople;
 	boolean cleaned;
 	boolean beingCleaned;
-	ArrayList<Staff> staffCleaning;
+	ArrayList<Staff> staffCleaning; //holds staff member that is cleaning the room
 	boolean available;
 	boolean occupied;
 	double cleaningTime;
@@ -22,7 +25,8 @@ public class Room {
 		this.available = true;
 		this.occupied = false;
 	}
-
+	
+	//getters and setters
 	public void setRoomNumber(int value) {
 		this.roomNumber = value;
 	}
@@ -56,10 +60,16 @@ public class Room {
 	}
 
 	public void addStaffCleaning(Staff staff) {
+		/**
+		 * add staff member cleaning the room
+		 */
 		this.staffCleaning.add(staff);
 	}
 
 	public void removeStaffCleaning() {
+		/**
+		 * remove staff member once room is finished being cleaned
+		 */
 		this.staffCleaning.clear();
 	}
 
@@ -92,6 +102,7 @@ public class Room {
 	public String toStringRoomOccupancy() {
 		/**
 		 * toString for each room and its occupancy
+		 * not used
 		 */
 		if (this.numOfPeople == 0) {
 			return "Room #" + this.roomNumber + ": Vacant";
@@ -100,7 +111,9 @@ public class Room {
 	}
 
 	public String detailedToString() {
-		//test
+		/**
+		 * toString for each room, room type, and its occupancy
+		 */
 		return "Room #" + this.roomNumber + " (" + this.type + ")";
 	}
 

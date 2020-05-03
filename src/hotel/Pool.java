@@ -50,7 +50,8 @@ public class Pool {
 	
 	public void printPoolActivity() {
 		/**
-		 * method to pint pool activity in report
+		 * method to print pool activity in report
+		 * prints guest name and the time they were in the pool
 		 */
 		System.out.println("\r\n" + "***Pool Activity***");
 		System.out.println(this.dayGuests.size() + " used the pool today:" + "\r\n");

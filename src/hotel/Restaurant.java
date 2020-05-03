@@ -27,13 +27,13 @@ public class Restaurant {
 	//adds guests already in hotel into the restaurant
 	public void addGuestToRestaurant (ArrayList<Guest> newGuests, double timeAdded) {
 		/**
-		 * adds guests staying at the hotel to the restaurant 
+		 * adds guests staying at the hotel to the restaurant if there is enough space to hold them
 		 */
 		if (newGuests.size() < (this.maxCapacity - this.occupants.size())) {
 			for (int i=0; i<newGuests.size(); i++) {
 				this.occupants.add(newGuests.get(i));
 				this.dayTotalPeople.add(newGuests.get(i));
-				this.dayTimes.add(timeAdded);//time guest was added for reference in restaurant activity report
+				this.dayTimes.add(timeAdded); //time guest was added for reference in restaurant activity report
 				newGuests.get(i).setInRestaurant(true);
 				this.payMeals(newGuests.get(i));
 			}
@@ -43,7 +43,7 @@ public class Restaurant {
 	//adds customers not in hotel into the restaurant
 	public void addCustomerToRestaurant(Customer customer, double timeAdded) {
 		/**
-		 * adds customers to the restaurant
+		 * adds customers to the restaurant if there is enough space to hold them
 		 */
 		if (this.occupants.size() < this.maxCapacity) {
 			this.occupants.add(customer);
@@ -93,6 +93,7 @@ public class Restaurant {
 		/**
 		 * prints restaurant activity part of report when called
 		 * calculated totals for day
+		 * prints name of guest or customer, how much they payed for a meal, and at what time
 		 */
 		int totalServed = this.dayTotalPeople.size();
 		int guestsServed = 0;

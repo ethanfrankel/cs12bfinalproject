@@ -9,6 +9,7 @@ public class Staff {
 		this.currentlyCleaning = false;
 	}
 	
+	//getters and setters
 	public void setCurrentlyCleaning(boolean value) {
 		this.currentlyCleaning = value;
 	}
