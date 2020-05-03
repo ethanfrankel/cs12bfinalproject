@@ -8,6 +8,8 @@ public class Room {
 	double price;
 	int numOfPeople;
 	boolean cleaned;
+	boolean beingCleaned;
+	ArrayList<Staff> staffCleaning;
 	boolean available;
 	boolean occupied;
 	double cleaningTime;
@@ -52,6 +54,14 @@ public class Room {
 		return this.price;
 	}
 	
+	public void addStaffCleaning(Staff staff) {
+		this.staffCleaning.add(staff);
+	}
+	
+	public void removeStaffCleaning() {
+		this.staffCleaning.clear();
+	}
+	
 	public void addGuests(Guest guest) {
 		this.occupants.add(guest);
 		this.numOfPeople++;
@@ -66,19 +76,19 @@ public class Room {
 	}
 	
 	public String toString() {
-		return "Room " + this.roomNumber;
+		return "Room #" + this.roomNumber;
 	}
 	
 	public String toStringRoomOccupancy() {
 		if (this.numOfPeople == 0) {
-			return "Room " + this.roomNumber + ": Vacant";
+			return "Room #" + this.roomNumber + ": Vacant";
 		}
-		return "Room " + this.roomNumber + ": " + this.numOfPeople + " guests";
+		return "Room #" + this.roomNumber + ": " + this.numOfPeople + " guests";
 	}
 	
 	public String detailedToString() {
 		//test
-		return "Room " + this.roomNumber + " (" + this.type + ")";
+		return "Room #" + this.roomNumber + " (" + this.type + ")";
 	}
 	
 	public String printGuests() {

@@ -55,6 +55,7 @@ public class HotelSimulation {
 		Hotel hotel = new Hotel(numTwoGuestRooms, numFourGuestRooms, numSuiteRooms, numStaff);
 		hotel.addRooms();
 		hotel.setRoomNumbers();
+		hotel.setStaffNumbers();
 		//for (int i = 0; i < hotel.rooms.size(); i++) {
 			//System.out.println(hotel.rooms.get(i).detailedToString());
 		//}
@@ -66,6 +67,7 @@ public class HotelSimulation {
 			startCommand = temp;
 		}
 		for (int i = 1; i < numDays + 1; i++) {
+			hotel.dirtyRooms();
 			for (int j = 0; j < 10; j++) {
 				String dayLittleTick = i + "." + j;
 				double dayNotation = Double.parseDouble(dayLittleTick);
@@ -87,10 +89,15 @@ public class HotelSimulation {
 				
 					
 			}
+			
 			System.out.println("Day "+ i + " is over");
 			double dayRevenue = hotel.financialAnalysis.dayRevenue(hotel.rooms, hotel.restaurant);
 			double dayCosts = hotel.financialAnalysis.dayCosts(hotel.numStaff);
 			double currentAccountBalance = hotel.financialAnalysis.calculateCurrentAccountBalance(dayRevenue, dayCosts);
+			hotel.clearGuestStatements();
+			hotel.restaurant.resetDayVariables();
+			hotel.pool.resetDayVariables();
+			hotel.cleanRooms();
 			if(i < numDays + 1) {
 				int choice = userChoices(i, numDays);
 				while(choice != 1) {
@@ -129,10 +136,6 @@ public class HotelSimulation {
 				}
 			
 			}
-			hotel.clearGuestStatements();
-			hotel.restaurant.resetDayVariables();
-			hotel.pool.resetDayVariables();
-			//clean rooms
 			continue;
 		}
 		System.out.println("The Simulation is Complete!");

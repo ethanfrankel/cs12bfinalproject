@@ -12,7 +12,7 @@ public class Hotel {
 	Room[] rooms;
 	Restaurant restaurant;
 	Pool pool;
-	//Staff[] staff;
+	Staff[] staff;
 	int numStaff;
 	int totalGuests;
 	int totalCustomers;
@@ -40,7 +40,7 @@ public class Hotel {
 		this.numFourGuestRoom = numFourGuestRoom;
 		this.numSuiteRoom = numSuiteRoom;
 		this.rooms = new Room[numTwoGuestRoom + numFourGuestRoom + numSuiteRoom];
-		//this.staff = new Staff[this.numStaff];
+		this.staff = new Staff[numStaff];
 		this.totalGuests = 0;
 		this.totalCustomers = 0;
 		this.guestCheckInStatementsLine1 = new ArrayList<String>() ;
@@ -65,6 +65,13 @@ public class Hotel {
 	public void setRoomNumbers() {
 		for (int i = 0; i < this.rooms.length; i++) {
 			this.rooms[i].setRoomNumber(i + 1);
+		}
+	}
+
+	public void setStaffNumbers() {
+		for (int i = 0; i < this.staff.length; i++) {
+			this.staff[i] = new Staff();
+			this.staff[i].setStaffNumber(i + 1);
 		}
 	}
 	
@@ -256,9 +263,42 @@ public class Hotel {
 	}
 	
 	public void cleanRooms() {
-		for (int i = 0; i < this.numStaff; i++) {
-			int roomIndex = random.nextInt(this.rooms.length + 1);
-			
+		ArrayList<Room> roomsToClean = new ArrayList<Room>();
+		for (int i = 0; i < this.rooms.length; i++) {
+			if (this.rooms[i].available == false && this.rooms[i].beingCleaned == false && this.rooms[i].cleaned == false) {
+				roomsToClean.add(this.rooms[i]);
+			}
+		}
+		int roomsToCleanCounter = 0;
+		while (roomsToCleanCounter != roomsToClean.size()) {
+			for (int i = 0; i < this.staff.length; i++) {
+				if (this.staff[i].currentlyCleaning == false) {
+					int roomIndex = random.nextInt(roomsToClean.size() + 1);
+					roomsToClean.get(roomIndex).addStaffCleaning(this.staff[i]);
+					roomsToClean.get(roomIndex).beingCleaned = true;
+					this.staff[i].setTimeStartedCleaning(this.currentTime);
+					roomsToCleanCounter++;
+					System.out.println("(" + this.currentTime + ")" + this.staff[i] + " started cleaning " + roomsToClean.get(roomIndex));
+				}
+			}
+		}
+		for (int i = 0; i < this.rooms.length; i++) {
+			if (this.rooms[i].beingCleaned) {
+				if (this.currentTime >= this.rooms[i].staffCleaning.get(0).timeStartedCleaning + this.rooms[i].cleaningTime) {
+					this.rooms[i].removeStaffCleaning();
+					this.rooms[i].setCleaned(true);
+					this.rooms[i].beingCleaned = false;
+					System.out.println("(" + this.currentTime + ")" + this.staff[i] + " finished cleaning " + this.rooms[i]);
+				}
+			}
+		}
+	}
+	
+	public void dirtyRooms() {
+		for (int i = 0; i < this.rooms.length; i++) {
+			if (this.rooms[i].available == false) {
+				this.rooms[i].setCleaned(false);
+			}
 		}
 	}
 	
