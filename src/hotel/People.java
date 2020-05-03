@@ -1,10 +1,8 @@
 package hotel;
 
 public class People {
-	double balance;
-	String type;
-	String name;
-	//double currentTimeCounter;
+	String type;//guest or customer
+	String name;//randomly assigned name from names.txt
 	double timeEnterRestaurant;
 	boolean inRestaurant;
 	boolean inPool;
@@ -15,7 +13,6 @@ public class People {
 	
 	public void setTimeEnterRestaurant(double value) {
 		this.timeEnterRestaurant = value;
-		//this.currentTimeCounter = value;
 	}
 	
 	public void setInRestaurant(boolean value) {
@@ -25,9 +22,4 @@ public class People {
 	public void setInPool(boolean value) {
 		this.inPool = value;
 	}
-	
-	public void updateBalance(double value) {
-		this.balance = this.balance + value;
-	}
-
 }
